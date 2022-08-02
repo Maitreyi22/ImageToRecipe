@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, redirect, url_for, request, render_template
 import os
+from backend.database import recipe_details
 import numpy as np
 import tensorflow as tf
 from werkzeug.utils import secure_filename
@@ -25,10 +26,10 @@ model = load_model(MODEL_PATH)
 category={
     0: ['burger','Burger'], 1: ['butter_naan','Butter Naan'], 2: ['chai','Chai'],
     3: ['chapati','Chapati'], 4: ['chole_bhature','Chole Bhature'], 5: ['dal_makhani','Dal Makhani'],
-    6: ['dhokla','Dhokla'], 7: ['fried_rice','Fried Rice'], 8: ['idli','Idli'], 9: ['jalegi','Jalebi'],
+    6: ['dhokla','Khaman Dhokla'], 7: ['fried_rice','Fried Rice'], 8: ['idli','Idli'], 9: ['jalegi','Jalebi'],
     10: ['kathi_rolls','Kaathi Rolls'], 11: ['kadai_paneer','Kadai Paneer'], 12: ['kulfi','Kulfi'],
-    13: ['masala_dosa','Masala Dosa'], 14: ['momos','Momos'], 15: ['paani_puri','Paani Puri'],
-    16: ['pakode','Pakode'], 17: ['pav_bhaji','Pav Bhaji'], 18: ['pizza','Pizza'], 19: ['samosa','Samosa']
+    13: ['masala_dosa','Masala Dosa'], 14: ['momos','Veg Momos'], 15: ['paani_puri','Paani Puri'],
+    16: ['pakode','Pakode'], 17: ['pav_bhaji','Pav Bhaji'], 18: ['pizza','Veg Pizza'], 19: ['samosa','Samosa']
 }
 
 def predict_image(filename,model):
@@ -57,8 +58,10 @@ def upload():
 
         pred = predict_image(file_path, model)
         result=pred
+        resJson = recipe_details(result)
+        name = resJson['name']
         return jsonify({
-            "message": result
+            "message": name
         })
     return None
 
