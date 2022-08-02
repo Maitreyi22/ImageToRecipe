@@ -1,9 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:projectapp/ReciepePage.dart';
 import 'package:provider/provider.dart';
 import 'package:projectapp/registrationuser.dart';
+import 'package:http/http.dart' as http;
 
 class DashBoard extends StatefulWidget {
   Function signOut;
@@ -20,6 +25,36 @@ class _DashBoardState extends State<DashBoard> {
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+
+  File? selectedImage;
+  String? message = '';
+
+  onUploadImage() async {
+
+    var image = await ImagePicker().getImage(source: ImageSource.gallery);
+    selectedImage = File(image!.path);
+
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('https://2a9f-123-201-215-121.in.ngrok.io/predict'),
+    );
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        selectedImage!.readAsBytes().asStream(),
+        selectedImage!.lengthSync(),
+        filename: selectedImage!.path.split('/').last,
+      ),
+    );
+    request.headers.addAll(headers);
+    print("request: $request");
+    final res = await request.send();
+    http.Response response = await http.Response.fromStream(res);
+    final resJson = jsonDecode(response.body);
+    message = resJson["message"];
+    setState(() {});
+  }
 
   void _read() async {
     DocumentSnapshot documentSnapshot;
@@ -155,7 +190,9 @@ class _DashBoardState extends State<DashBoard> {
                 height: 59,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
+                    selectedImage == null
+                    ? onUploadImage()
+                    : Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ReciepePage()),
                     );
