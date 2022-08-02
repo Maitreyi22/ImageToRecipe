@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:projectapp/ReciepePage.dart';
 import 'package:provider/provider.dart';
 import 'package:projectapp/registrationuser.dart';
+import 'dart:math' as math;
 
 class DashBoard extends StatefulWidget {
   Function signOut;
@@ -59,14 +60,14 @@ class _DashBoardState extends State<DashBoard> {
             Positioned(
                 child: SizedBox(
               width: 600,
-              height: 200,
+              height: 230,
               child: DecoratedBox(
                 decoration: BoxDecoration(color: Colors.deepOrange[800]),
               ),
             )),
             Positioned(
               top: 20,
-              left: 20,
+              left: 30,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -80,7 +81,7 @@ class _DashBoardState extends State<DashBoard> {
                       "Logout",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 17.5,
+                        fontSize: 16,
                       ),
                     ),
                   ),
@@ -91,7 +92,7 @@ class _DashBoardState extends State<DashBoard> {
                     "Profile",
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold),
                   ),
                   Container(
@@ -101,14 +102,24 @@ class _DashBoardState extends State<DashBoard> {
                     "Wishlist",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 17.5,
+                      fontSize: 16,
                     ),
                   ),
                 ],
               ),
             ),
             Positioned(
-                top: 100,
+                top: 170,
+                left: 80,
+                child: Transform.rotate(
+                  angle: -math.pi / 2,
+                  child: SizedBox(
+                      height: 40,
+                      width: 40,
+                      child: Image.asset('images/cookhat.png')),
+                )),
+            Positioned(
+                top: 130,
                 left: 132,
                 child: CircleAvatar(
                   backgroundColor: Colors.white,
@@ -121,7 +132,7 @@ class _DashBoardState extends State<DashBoard> {
                 )),
             Positioned(
               left: MediaQuery.of(context).size.width - 345,
-              top: 250,
+              top: 270,
               child: Row(
                 children: [
                   Container(

@@ -70,7 +70,12 @@ flutter:
    - images/noodlesimg.png
    - images/googleicon.png
    - images/logouticon.png
-   - images/veg_icon.png
+   - images/cookhat.png
+   - images/cookpot.png
+   - images/cookpeop.jpg
+   - images/cookpot2.jpg
+   - images/cookveg.jpg
+  
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

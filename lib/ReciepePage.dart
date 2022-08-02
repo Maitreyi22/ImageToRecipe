@@ -54,18 +54,7 @@ class _ReciepePageState extends State<ReciepePage> {
           //     ),
           //   ),
           // ),
-          Container(
-            // margin: const EdgeInsets.only(top: 20, left: 35, right: 35),
 
-            height: 180.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(0),
-                image: const DecorationImage(
-                    image: NetworkImage(
-                      "https://i.picsum.photos/id/1060/5598/3732.jpg?hmac=31kU0jp5ejnPTdEt-8tAXU5sE-buU-y1W1qk_BsiUC8",
-                    ),
-                    fit: BoxFit.cover)),
-          ),
           Row(
             children: [
               Container(
