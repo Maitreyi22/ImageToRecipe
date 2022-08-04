@@ -5,6 +5,7 @@ import 'package:delayed_display/delayed_display.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:projectapp/ReciepePage.dart';
 import 'package:projectapp/dashboard.dart';
+import 'dart:math' as math;
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
   scopes: <String>[
@@ -75,37 +76,163 @@ class _AuthState extends State<Auth> {
           child: Stack(
         children: [
           Positioned(
-              top: 100,
-              left: 32,
+              top: 55,
+              left: 230,
+              child: Transform.rotate(
+                angle: math.pi / 6,
+                child: SizedBox(
+                  height: 75,
+                  child: Image.asset(
+                    'images/Ice cream.png',
+                    color: Colors.white.withOpacity(0.10),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
+                ),
+              )),
+
+          Positioned(
+              top: 150,
+              left: 110,
+              child: Transform.rotate(
+                angle: math.pi / 30,
+                child: SizedBox(
+                  height: 50,
+                  child: Image.asset(
+                    'images/Fries.png',
+                    color: Colors.white.withOpacity(0.10),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
+                ),
+              )),
+
+          Positioned(
+              top: 170,
+              right: 46,
+              child: Transform.rotate(
+                angle: math.pi / 30,
+                child: SizedBox(
+                  height: 39,
+                  child: Image.asset(
+                    'images/Pizza.png',
+                    color: Colors.white.withOpacity(0.10),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
+                ),
+              )),
+
+          const Positioned(
+              top: 200,
+              left: 100,
               child: Text(
-                "Welcome!",
+                "What",
                 style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
-                    color: Colors.red[700]),
+                    color: Colors.white),
               )),
-          Positioned(
-              top: 155,
-              left: 32,
+
+          const Positioned(
+              top: 200,
+              left: 200,
               child: Text(
-                "A place to find all the food you can possibly \nimagine.",
+                "Name",
                 style: TextStyle(
-                  fontSize: 16.8,
-                  color: Colors.grey[700],
+                    fontSize: 35,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFD78915)),
+              )),
+
+          const Positioned(
+              top: 250,
+              left: 40,
+              child: Text(
+                "A place to find all the food you can possibly \n                              imagine!",
+                style: TextStyle(fontSize: 16, color: Colors.white),
+              )),
+
+          Positioned(
+              top: 220,
+              left: 55,
+              child: Transform.rotate(
+                angle: math.pi / 7,
+                child: SizedBox(
+                  height: 85,
+                  child: Image.asset(
+                    'images/Burger.png',
+                    color: Colors.white.withOpacity(0.10),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
                 ),
               )),
+
           Positioned(
-              top: 190,
-              left: 90,
-              child: SizedBox(
-                height: 410,
-                child: Image.asset('images/noodlesimg.png'),
+              top: 330,
+              right: 70,
+              child: Transform.rotate(
+                angle: -math.pi / 6,
+                child: SizedBox(
+                  height: 80,
+                  child: Image.asset(
+                    'images/Fries.png',
+                    color: Colors.white.withOpacity(0.10),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
+                ),
               )),
+
           Positioned(
-              top: 650,
-              width: 227,
-              left: 78,
-              height: 68,
+              top: 440,
+              left: 50,
+              child: Transform.rotate(
+                angle: math.pi / 30,
+                child: SizedBox(
+                  height: 59,
+                  child: Image.asset(
+                    'images/Pizza.png',
+                    color: Colors.white.withOpacity(0.10),
+                    colorBlendMode: BlendMode.modulate,
+                  ),
+                ),
+              )),
+
+          Positioned(
+            top: 520,
+            right: 80,
+            child: SizedBox(
+              height: 80,
+              child: Image.asset(
+                'images/Bubble Tea.png',
+                color: Colors.white.withOpacity(0.10),
+                colorBlendMode: BlendMode.modulate,
+              ),
+            ),
+          ),
+
+          Positioned(
+            top: 617,
+            left: 80,
+            child: SizedBox(
+              height: 72,
+              child: Image.asset(
+                'images/Ice cream.png',
+                color: Colors.white.withOpacity(0.10),
+                colorBlendMode: BlendMode.modulate,
+              ),
+            ),
+          ),
+
+          // Positioned(
+          //     top: 190,
+          //     left: 90,
+          //     child: SizedBox(
+          //       height: 410,
+          //       child: Image.asset('images/noodlesimg.png'),
+          //     )),
+          Positioned(
+              top: 670,
+              width: 350,
+              left: 20,
+              height: 70,
               child: Center(
                 widthFactor: 2.2,
                 child: DelayedDisplay(
@@ -116,26 +243,29 @@ class _AuthState extends State<Auth> {
                     },
                     child: Card(
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      color: Colors.red[700],
+                      color: Color(0xFFD78915),
                       //elevation: 10,
                       child: Container(
-                        padding: const EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(7),
                         child: Row(
                           children: [
+                            const SizedBox(
+                              width: 80,
+                            ),
                             SizedBox(
-                              width: 50,
-                              //height: 40,
+                              width: 30,
+                              height: 40,
                               child: Image.asset(
                                 'images/googleicon.png',
                               ),
                             ),
                             const SizedBox(
-                              width: 20,
+                              width: 10,
                             ),
                             const Text(
-                              'Login from Google',
+                              'Login with Google',
                               style: TextStyle(color: Colors.white),
                             )
                           ],
@@ -153,9 +283,10 @@ class _AuthState extends State<Auth> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color(0xFF222222),
         body: ConstrainedBox(
-      constraints: const BoxConstraints.expand(),
-      child: _buildBody(),
-    ));
+          constraints: const BoxConstraints.expand(),
+          child: _buildBody(),
+        ));
   }
 }

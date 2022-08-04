@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, redirect, url_for, request, render_template
 import os
-from backend.database import recipe_details
+from database import recipe_details
 import numpy as np
 import tensorflow as tf
 from werkzeug.utils import secure_filename
