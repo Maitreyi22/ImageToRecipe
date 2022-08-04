@@ -6,15 +6,16 @@ import 'package:http/http.dart' as http;
 
 import 'dashboard.dart';
 
-class ReciepePage extends StatelessWidget {
-  final ImageFile imageData;
-  ReciepePage({Key? key, required this.imageData}) : super(key: key);
-  String? message = '';
+class ReciepePage extends StatefulWidget {
+  ReciepePage({
+    Key? key,
+  }) : super(key: key);
 
-  recipeDetails() async {
-    
-  }
+  @override
+  State<ReciepePage> createState() => _RecipePageState();
+}
 
+class _RecipePageState extends State<ReciepePage> {
   _launchURLZomato() async {
     var url = Uri.parse("https://www.zomato.com/");
     if (await canLaunchUrl(url)) {
@@ -68,7 +69,7 @@ class ReciepePage extends StatelessWidget {
                 // width: 120.0,
                 height: 40.0,
                 child: Text(
-                  message!,
+                  "Coffee",
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

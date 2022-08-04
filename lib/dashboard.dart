@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projectapp/ReciepePage.dart';
 import 'package:provider/provider.dart';
 import 'package:projectapp/registrationuser.dart';
+import 'package:http/http.dart' as http;
 import 'dart:math' as math;
 
 class DashBoard extends StatefulWidget {
@@ -30,12 +31,12 @@ class _DashBoardState extends State<DashBoard> {
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-  File? selectedImageFile;
+  File? selectedImage;
   String? message = '';
 
   onUploadImage() async {
-     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    selectedImageFile = File(image!.path);
+    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
       Uri.parse('https://d30e-219-91-170-121.in.ngrok.io/predict'),
@@ -44,9 +45,9 @@ class _DashBoardState extends State<DashBoard> {
     request.files.add(
       http.MultipartFile(
         'image',
-        imageData.selectedImage!.readAsBytes().asStream(),
-        imageData.selectedImage!.lengthSync(),
-        filename: imageData.selectedImage!.path.split('/').last,
+        selectedImage!.readAsBytes().asStream(),
+        selectedImage!.lengthSync(),
+        filename: selectedImage!.path.split('/').last,
       ),
     );
     request.headers.addAll(headers);
@@ -57,10 +58,7 @@ class _DashBoardState extends State<DashBoard> {
     message = resJson["message"];
     // ignore: use_build_context_synchronously
     Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) =>
-                ReciepePage(imageData: ImageFile(selectedImageFile))));
+        context, MaterialPageRoute(builder: (context) => ReciepePage()));
   }
 
   void _read() async {
@@ -231,7 +229,7 @@ class _DashBoardState extends State<DashBoard> {
                 )),
 
             Positioned(
-            left: MediaQuery.of(context).size.width - 370,
+              left: MediaQuery.of(context).size.width - 370,
               top: 300,
               child: const Text(
                 'Hi, ',
@@ -319,8 +317,7 @@ class _DashBoardState extends State<DashBoard> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                          builder: (context) => const ReciepePage()),
+                      MaterialPageRoute(builder: (context) => ReciepePage()),
                     );
                   },
                   child: Card(
