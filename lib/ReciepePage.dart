@@ -1,15 +1,20 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:projectapp/DashBoard.dart';
+import 'package:http/http.dart' as http;
 
-class ReciepePage extends StatefulWidget {
-  const ReciepePage({Key? key}) : super(key: key);
+import 'dashboard.dart';
 
-  @override
-  State<ReciepePage> createState() => _ReciepePageState();
-}
+class ReciepePage extends StatelessWidget {
+  final ImageFile imageData;
+  ReciepePage({Key? key, required this.imageData}) : super(key: key);
+  String? message = '';
 
-class _ReciepePageState extends State<ReciepePage> {
+  recipeDetails() async {
+    
+  }
+
   _launchURLZomato() async {
     var url = Uri.parse("https://www.zomato.com/");
     if (await canLaunchUrl(url)) {
@@ -63,7 +68,7 @@ class _ReciepePageState extends State<ReciepePage> {
                 // width: 120.0,
                 height: 40.0,
                 child: Text(
-                  "Coffee",
+                  message!,
                   style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

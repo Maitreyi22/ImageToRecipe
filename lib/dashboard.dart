@@ -8,7 +8,6 @@ import 'package:projectapp/ReciepePage.dart';
 import 'package:provider/provider.dart';
 import 'package:projectapp/registrationuser.dart';
 import 'dart:math' as math;
-import 'package:http/http.dart' as http;
 
 class DashBoard extends StatefulWidget {
   Function signOut;
@@ -20,31 +19,34 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
+class ImageFile {
+  final File? selectedImage;
+
+  ImageFile(this.selectedImage);
+}
+
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
-
-  File? selectedImage;
+  File? selectedImageFile;
   String? message = '';
 
   onUploadImage() async {
-    var image = await ImagePicker().getImage(source: ImageSource.gallery);
-    selectedImage = File(image!.path);
-
+     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    selectedImageFile = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse(
-          'https://71c3-2409-4042-4c09-ff24-4c51-9289-d5e3-ea21.in.ngrok.io/predict'),
+      Uri.parse('https://d30e-219-91-170-121.in.ngrok.io/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
       http.MultipartFile(
         'image',
-        selectedImage!.readAsBytes().asStream(),
-        selectedImage!.lengthSync(),
-        filename: selectedImage!.path.split('/').last,
+        imageData.selectedImage!.readAsBytes().asStream(),
+        imageData.selectedImage!.lengthSync(),
+        filename: imageData.selectedImage!.path.split('/').last,
       ),
     );
     request.headers.addAll(headers);
@@ -53,7 +55,12 @@ class _DashBoardState extends State<DashBoard> {
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
     message = resJson["message"];
-    setState(() {});
+    // ignore: use_build_context_synchronously
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                ReciepePage(imageData: ImageFile(selectedImageFile))));
   }
 
   void _read() async {
@@ -224,7 +231,7 @@ class _DashBoardState extends State<DashBoard> {
                 )),
 
             Positioned(
-              left: MediaQuery.of(context).size.width - 370,
+            left: MediaQuery.of(context).size.width - 370,
               top: 300,
               child: const Text(
                 'Hi, ',
