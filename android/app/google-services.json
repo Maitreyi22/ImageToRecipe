@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "127662859224",
+    "firebase_url": "https://image-convertor-b3791-default-rtdb.firebaseio.com",
     "project_id": "image-convertor-b3791",
     "storage_bucket": "image-convertor-b3791.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "127662859224-g2dbo3frsmuv4arfmjum7o1ih3hanc7q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.projectapp",
+            "certificate_hash": "73f20f7c48b8f2370266af12728b9646f64747e4"
+          }
+        },
         {
           "client_id": "127662859224-hjniniqdj8n3fl9klert8vktrcrt6k87.apps.googleusercontent.com",
           "client_type": 1,
