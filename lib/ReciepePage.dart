@@ -12,25 +12,7 @@ class ReciepePage extends StatelessWidget {
   String? message = '';
 
   recipeDetails() async {
-    var request = http.MultipartRequest(
-      'POST',
-      Uri.parse('https://d30e-219-91-170-121.in.ngrok.io/predict'),
-    );
-    Map<String, String> headers = {"Content-type": "multipart/form-data"};
-    request.files.add(
-      http.MultipartFile(
-        'image',
-        imageData.selectedImage!.readAsBytes().asStream(),
-        imageData.selectedImage!.lengthSync(),
-        filename: imageData.selectedImage!.path.split('/').last,
-      ),
-    );
-    request.headers.addAll(headers);
-    print("request: $request");
-    final res = await request.send();
-    http.Response response = await http.Response.fromStream(res);
-    final resJson = jsonDecode(response.body);
-    message = resJson["message"];
+    
   }
 
   _launchURLZomato() async {
@@ -78,18 +60,7 @@ class ReciepePage extends StatelessWidget {
           //     ),
           //   ),
           // ),
-          Container(
-            // margin: const EdgeInsets.only(top: 20, left: 35, right: 35),
 
-            height: 180.0,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(0),
-                image: const DecorationImage(
-                    image: NetworkImage(
-                      "https://i.picsum.photos/id/1060/5598/3732.jpg?hmac=31kU0jp5ejnPTdEt-8tAXU5sE-buU-y1W1qk_BsiUC8",
-                    ),
-                    fit: BoxFit.cover)),
-          ),
           Row(
             children: [
               Container(
@@ -147,20 +118,22 @@ class ReciepePage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(top: 10, left: 38, right: 38),
             child: const Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. When an unknown printer took a galley of type and scrambled it to make a type specimen book.\n It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n When an unknown printer took \na galley of type and scrambled it to make a type specimen book.\n It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
               style: TextStyle(
                 fontSize: 15,
               ),
             ),
           ),
           Container(
-            margin: EdgeInsets.all(30),
+            height: 80,
+            color: Colors.grey,
+            margin: const EdgeInsets.all(2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                SizedBox(
                   height: 45,
-                  width: 150,
+                  width: 180,
                   child: ElevatedButton(
                     onPressed: _launchURLBigBasket,
                     style: ElevatedButton.styleFrom(
@@ -175,9 +148,9 @@ class ReciepePage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   height: 45,
-                  width: 150,
+                  width: 180,
                   child: ElevatedButton(
                     onPressed: _launchURLZomato,
                     style: ElevatedButton.styleFrom(
