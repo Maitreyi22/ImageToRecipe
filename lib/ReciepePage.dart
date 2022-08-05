@@ -7,10 +7,6 @@ import 'package:http/http.dart' as http;
 import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
-  ReciepePage({
-    Key? key,
-  }) : super(key: key);
-
   @override
   State<ReciepePage> createState() => _RecipePageState();
 }
@@ -40,40 +36,47 @@ class _RecipePageState extends State<ReciepePage> {
       body: SafeArea(
           child: ListView(
         children: [
-          Container(
-            margin: const EdgeInsets.only(top: 16, left: 17),
-            alignment: Alignment.topLeft,
-            height: 30,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back, size: 29)),
-          ),
-          // Container(
-          //   margin: const EdgeInsets.only(left: 135),
-          //   child: Text(
-          //     'Your Recipe',
-          //     style: TextStyle(
-          //       fontSize: 23,
-          //       fontWeight: FontWeight.bold,
-          //       color: Colors.deepOrange[800],
-          //     ),
-          //   ),
-          // ),
-
           Row(
             children: [
               Container(
-                margin: const EdgeInsets.only(top: 10, left: 38, right: 10),
+                margin: const EdgeInsets.only(top: 13, left: 17, bottom: 5),
+                alignment: Alignment.topLeft,
+                height: 30,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back, size: 29)),
+              ),
+              Container(
+                  margin: const EdgeInsets.only(top: 25, left: 265, bottom: 5),
+                  alignment: Alignment.topLeft,
+                  height: 22,
+                  child: Image.asset("images/heart.png", color: Colors.black)),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10, left: 30, right: 30),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: const Image(
+                image: NetworkImage(
+                    'https://i.picsum.photos/id/1060/5598/3732.jpg?hmac=31kU0jp5ejnPTdEt-8tAXU5sE-buU-y1W1qk_BsiUC8'),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 10, left: 30, right: 10),
                 // width: 120.0,
                 height: 40.0,
-                child: Text(
+                child: const Text(
                   "Coffee",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 22,
                       fontWeight: FontWeight.bold,
-                      color: Colors.deepOrange[800]),
+                      color: Colors.black),
                 ),
               ),
               Container(
@@ -87,15 +90,76 @@ class _RecipePageState extends State<ReciepePage> {
               )
             ],
           ),
+          Row(
+            children: [
+              Container(
+                height: 32,
+                margin: const EdgeInsets.only(top: 0, left: 30),
+                child: const SizedBox(
+                  child: Chip(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Color(0xFFD78915)),
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    padding: EdgeInsets.all(3),
+                    label: Text(
+                      'Easy',
+                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                    ), //Text
+                  ),
+                ),
+              ),
+              Container(
+                height: 32,
+                margin: const EdgeInsets.only(top: 0, left: 15),
+                child: const SizedBox(
+                  child: Chip(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Color(0xFFD78915)),
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    padding: EdgeInsets.all(3),
+                    label: Text(
+                      'Beverage',
+                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                    ), //Text
+                  ),
+                ),
+              ),
+              Container(
+                height: 32,
+                margin: const EdgeInsets.only(top: 0, left: 15),
+                child: const SizedBox(
+                  child: Chip(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Color(0xFFD78915)),
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    padding: EdgeInsets.all(3),
+                    label: Text(
+                      '5k cal',
+                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                    ), //Text
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const Divider(
+            height: 35,
+            thickness: 2,
+            color: Color(0xFFF2F2F2),
+          ),
+          //Chip
           Container(
-            margin: const EdgeInsets.only(top: 5, left: 38),
+            margin: const EdgeInsets.only(top: 0, left: 30),
             child: const Text(
               "Ingredients",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10, left: 38),
+            margin: const EdgeInsets.only(top: 10, left: 30),
             child: const Text(
               "Coffee powder - 1 teaspoon"
               "\n"
@@ -109,15 +173,60 @@ class _RecipePageState extends State<ReciepePage> {
               ),
             ),
           ),
+
+          const Divider(
+            height: 35,
+            thickness: 2,
+            color: Color(0xFFF2F2F2),
+          ),
+
           Container(
-            margin: const EdgeInsets.only(top: 10, left: 38),
+            margin: const EdgeInsets.only(top: 0, left: 30),
             child: const Text(
               "Recipe",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
+          Row(
+            children: [
+              Container(
+                height: 32,
+                margin: const EdgeInsets.only(top: 10, left: 30, bottom: 10),
+                child: const SizedBox(
+                  child: Chip(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Color(0xFFD78915)),
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    padding: EdgeInsets.all(3),
+                    label: Text(
+                      'Serves 1',
+                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                    ), //Text
+                  ),
+                ),
+              ),
+              Container(
+                height: 32,
+                margin: const EdgeInsets.only(top: 10, left: 15, bottom: 10),
+                child: const SizedBox(
+                  child: Chip(
+                    backgroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        side: BorderSide(color: Color(0xFFD78915)),
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    padding: EdgeInsets.all(3),
+                    label: Text(
+                      '5 mins',
+                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                    ), //Text
+                  ),
+                ),
+              ),
+            ],
+          ),
           Container(
-            margin: const EdgeInsets.only(top: 10, left: 38, right: 38),
+            margin: const EdgeInsets.only(top: 10, left: 30, right: 38),
             child: const Text(
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n When an unknown printer took \na galley of type and scrambled it to make a type specimen book.\n It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
               style: TextStyle(
@@ -125,6 +234,12 @@ class _RecipePageState extends State<ReciepePage> {
               ),
             ),
           ),
+          const Divider(
+            height: 35,
+            thickness: 2,
+            color: Color(0xFFF2F2F2),
+          ),
+
           Container(
             height: 80,
             color: Colors.grey,
@@ -138,9 +253,7 @@ class _RecipePageState extends State<ReciepePage> {
                   child: ElevatedButton(
                     onPressed: _launchURLBigBasket,
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.deepOrange[700]!,
-                        side: BorderSide(
-                            width: 1, color: Colors.deepOrange[700]!),
+                        primary: Color(0xFFD78915),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     child: const Text(
@@ -156,13 +269,13 @@ class _RecipePageState extends State<ReciepePage> {
                     onPressed: _launchURLZomato,
                     style: ElevatedButton.styleFrom(
                         primary: Colors.white,
-                        side: BorderSide(
-                            width: 1, color: Colors.deepOrange[700]!),
+                        side: const BorderSide(
+                            width: 1, color: Color(0xFFD78915)),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
-                    child: Text(
+                    child: const Text(
                       'Order Food',
-                      style: TextStyle(color: Colors.deepOrange[700]!),
+                      style: TextStyle(color: Color(0xFFD78915)),
                     ),
                   ),
                 ),
