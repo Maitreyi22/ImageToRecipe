@@ -27,7 +27,6 @@ class ImageFile {
   //ImageFile(this.selectedImage);
   ImageFile(this.message);
 }
-
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;

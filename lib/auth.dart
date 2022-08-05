@@ -61,13 +61,16 @@ class _AuthState extends State<Auth> {
     }
   }
 
-  void signOut() {
-    _handleSignOut();
+  void signOut() async {
+    await _googleSignIn.signOut();
+    setState(() {});
   }
 
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+  // Future<void> _handleSignOut() => _googleSignIn.signOut();
 
   Widget _buildBody() {
+    final ButtonStyle style =
+        ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
     final GoogleSignInAccount? user = _currentUser;
     if (user != null) {
       return DashBoard(user, signOut);
