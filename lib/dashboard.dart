@@ -21,9 +21,11 @@ class DashBoard extends StatefulWidget {
 }
 
 class ImageFile {
-  final File? selectedImage;
+  //final File? selectedImage;
+  String? message = '';
 
-  ImageFile(this.selectedImage);
+  //ImageFile(this.selectedImage);
+  ImageFile(this.message);
 }
 
 class _DashBoardState extends State<DashBoard> {
@@ -39,7 +41,7 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://d30e-219-91-170-121.in.ngrok.io/predict'),
+      Uri.parse('https://f930-124-66-170-196.in.ngrok.io/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -57,8 +59,8 @@ class _DashBoardState extends State<DashBoard> {
     final resJson = jsonDecode(response.body);
     message = resJson["message"];
     // ignore: use_build_context_synchronously
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ReciepePage()));
+    // Navigator.push(context,
+    //     MaterialPageRoute(builder: (context) => ReciepePage(message!)));
   }
 
   void _read() async {
