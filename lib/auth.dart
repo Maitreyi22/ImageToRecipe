@@ -61,11 +61,12 @@ class _AuthState extends State<Auth> {
     }
   }
 
-  void signOut() {
-    _handleSignOut();
+  void signOut() async {
+    await _googleSignIn.signOut();
+    setState(() {});
   }
 
-  Future<void> _handleSignOut() => _googleSignIn.disconnect();
+  // Future<void> _handleSignOut() => _googleSignIn.signOut();
 
   Widget _buildBody() {
     final ButtonStyle style =
