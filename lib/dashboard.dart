@@ -27,6 +27,7 @@ class ImageFile {
   //ImageFile(this.selectedImage);
   ImageFile(this.message);
 }
+
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;
@@ -40,7 +41,7 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://f930-124-66-170-196.in.ngrok.io/predict'),
+      Uri.parse('https://2a3d-219-91-178-107.in.ngrok.io/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
