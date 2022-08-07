@@ -20,21 +20,21 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
-// class ImageFile {
-//   //final File? selectedImage;
-//   String? message = '';
-
-//   //ImageFile(this.selectedImage);
-//   ImageFile(this.message);
-// }
-
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
-  String? message = '';
+  String? name = '';
+  // String? difficultyLevel = '';
+  // String? imageUrl = '';
+  // String? ingredients = '';
+  // String? recipe = '';
+  // String? cuisine = '';
+  // String? calories = '';
+  // String? approxTime = '';
+  // String? serving = '';
 
   onUploadImage() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -42,7 +42,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://62f6-124-66-170-211.in.ngrok.io/predict'),
+      Uri.parse('https://8e64-124-66-170-211.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -60,8 +60,15 @@ class _DashBoardState extends State<DashBoard> {
     final res = await request.send();
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
-    message = resJson["message"];
-
+    name = resJson["name"];
+    // recipe = resJson["recipe"];
+    // ingredients = resJson["ingredients"];
+    // cuisine = resJson["cuisine"];
+    // difficultyLevel = resJson["difficultyLevel"];
+    // calories = resJson["calories"];
+    // approxTime = resJson["approxTime"];
+    // imageUrl = resJson["imageUrl"];
+    // serving = resJson["serving"];
     setState(() {});
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
@@ -325,13 +332,23 @@ class _DashBoardState extends State<DashBoard> {
                     onUploadImage();
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return ReciepePage(name: message!);
+                      return ReciepePage(
+                        name: name!,
+                        // recipe: recipe!,
+                        // ingredients: ingredients!,
+                        // cuisine: cuisine!,
+                        // difficultyLevel: difficultyLevel!,
+                        // calories: calories!,
+                        // approxTime: approxTime!,
+                        // imageUrl: imageUrl!,
+                        // serving: serving!
+                      );
                     }));
                   },
                   child: Card(
                     elevation: 0,
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xFFD78915)),
+                        side: const BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.circular(8)),
                     color: Colors.white,
                     child: const Center(
