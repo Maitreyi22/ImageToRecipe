@@ -20,13 +20,13 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
-class ImageFile {
-  //final File? selectedImage;
-  String? message = '';
+// class ImageFile {
+//   //final File? selectedImage;
+//   String? message = '';
 
-  //ImageFile(this.selectedImage);
-  ImageFile(this.message);
-}
+//   //ImageFile(this.selectedImage);
+//   ImageFile(this.message);
+// }
 
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
@@ -41,7 +41,7 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://f930-124-66-170-196.in.ngrok.io/predict'),
+      Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -283,6 +283,10 @@ class _DashBoardState extends State<DashBoard> {
                 child: InkWell(
                   onTap: () {
                     onUploadImage();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ReciepePage(name: message!);
+                    }));
                   },
                   child: Card(
                     //elevation: 30,
@@ -290,19 +294,19 @@ class _DashBoardState extends State<DashBoard> {
                         //side: BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(8)),
                     color: Color(0xFFD78915),
-                    child: Center(
-                      child: Column(
-                        children: <Widget>[
-                          selectedImage == null
-                              ? const Text(' \n Take a photo',
-                                  style: const TextStyle(color: Colors.white))
-                              : Text(message!)
-                        ],
-                      ),
-                      // child: Text(
-                      //   'Take a photo',
-                      //   style: TextStyle(color: Colors.white),
+                    child: const Center(
+                      // child: Column(
+                      //   children: <Widget>[
+                      //     selectedImage == null
+                      //         ? const Text(' \n Take a photo',
+                      //             style: const TextStyle(color: Colors.white))
+                      //         : Text(message!)
+                      //   ],
                       // ),
+                      child: Text(
+                        'Take a photo',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -317,10 +321,10 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ReciepePage()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => ReciepePage()),
+                    // );
                   },
                   child: Card(
                     //elevation: 30,

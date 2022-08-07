@@ -7,11 +7,21 @@ import 'package:http/http.dart' as http;
 import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
+  String name;
+  ReciepePage({
+    Key? key,
+    required this.name,
+  }) : super(key: key);
+
   @override
   State<ReciepePage> createState() => _RecipePageState();
 }
 
 class _RecipePageState extends State<ReciepePage> {
+  // String? get name => null;
+
+  // get age => null;
+
   _launchURLZomato() async {
     var url = Uri.parse("https://www.zomato.com/");
     if (await canLaunchUrl(url)) {
@@ -90,6 +100,11 @@ class _RecipePageState extends State<ReciepePage> {
               )
             ],
           ),
+          Text(
+            widget.name.toString(),
+            style: const TextStyle(fontSize: 20),
+          ),
+
           Row(
             children: [
               Container(
