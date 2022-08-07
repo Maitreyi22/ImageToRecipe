@@ -81,10 +81,10 @@ class _RecipePageState extends State<ReciepePage> {
                 margin: const EdgeInsets.only(top: 10, left: 30, right: 10),
                 // width: 120.0,
                 height: 40.0,
-                child: const Text(
-                  "Coffee",
-                  style: TextStyle(
-                      fontSize: 22,
+                child: Text(
+                  widget.name.toString(),
+                  style: const TextStyle(
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
@@ -99,10 +99,6 @@ class _RecipePageState extends State<ReciepePage> {
                 child: Image.asset('images/veg_icon.png'),
               )
             ],
-          ),
-          Text(
-            widget.name.toString(),
-            style: const TextStyle(fontSize: 20),
           ),
 
           Row(

@@ -60,8 +60,10 @@ def upload():
         result=pred
         resJson = recipe_details(result)
         name = resJson['name']
+       
         return jsonify({
             "message": name
+         
         })
     return None
 

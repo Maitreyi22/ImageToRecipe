@@ -42,7 +42,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
+      Uri.parse('https://62f6-124-66-170-211.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -61,6 +61,7 @@ class _DashBoardState extends State<DashBoard> {
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
     message = resJson["message"];
+
     setState(() {});
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
@@ -279,6 +280,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               top: 640,
+              bottom: 105,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
               child: Container(
@@ -286,14 +288,13 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    onUploadImage();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ReciepePage(name: message!);
-                    }));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return ReciepePage(name: message!);
+                    // }));
                   },
                   child: Card(
-                    //elevation: 30,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                         //side: BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(8)),
@@ -318,6 +319,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               top: 703,
+              bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
               child: Container(
@@ -325,13 +327,14 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => ReciepePage()),
-                    // );
+                    onUploadImage();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ReciepePage(name: message!);
+                    }));
                   },
                   child: Card(
-                    //elevation: 30,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.circular(8)),
