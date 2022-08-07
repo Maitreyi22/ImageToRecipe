@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
+  late final ImageFile _imageFile;
   @override
   State<ReciepePage> createState() => _RecipePageState();
 }
