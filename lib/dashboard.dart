@@ -168,7 +168,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
               top: 120,
               left: 90,
@@ -181,7 +180,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
               top: 90,
               left: 170,
@@ -206,7 +204,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
                 top: 194,
                 right: 45,
@@ -221,7 +218,6 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                   ),
                 )),
-
             Positioned(
                 top: 190,
                 left: 140,
@@ -234,7 +230,6 @@ class _DashBoardState extends State<DashBoard> {
                         NetworkImage(widget.user.photoUrl.toString()),
                   ),
                 )),
-
             Positioned(
               left: MediaQuery.of(context).size.width - 370,
               top: 300,
@@ -349,38 +344,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
-            // Positioned(
-            //   top: 580,
-            //   left: MediaQuery.of(context).size.width - 371,
-            //   child: Container(
-            //     width: 345,
-            //     height: 59,
-            //     child: InkWell(
-            //       onTap: () {
-            //         Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (context) =>
-            //                   RegistrationUser(widget.user, widget.signOut)),
-            //         );
-            //       },
-            //       child: Card(
-            //         //elevation: 30,
-            //         shape: RoundedRectangleBorder(
-            //             //side: BorderSide(color: Colors.white),
-            //             borderRadius: BorderRadius.circular(10)),
-            //         color: Colors.deepOrange[800],
-            //         child: const Center(
-            //           child: Text(
-            //             'Upload a photo',
-            //             style: TextStyle(color: Colors.white),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       );
