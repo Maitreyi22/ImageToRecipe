@@ -14,7 +14,7 @@ class DashBoard extends StatefulWidget {
   Function signOut;
   GoogleSignInAccount user;
 
-  DashBoard(this.user, this.signOut);
+  DashBoard(this.user, this.signOut, {Key? key}) : super(key: key);
 
   @override
   State<DashBoard> createState() => _DashBoardState();
@@ -41,7 +41,10 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
+
       Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
+
+      // Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -58,6 +61,7 @@ class _DashBoardState extends State<DashBoard> {
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
     message = resJson["message"];
+    setState(() {});
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
     //     MaterialPageRoute(builder: (context) => ReciepePage(message!)));
