@@ -42,9 +42,9 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
+      // Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
 
-      // Uri.parse('http://10.0.2.2:5001/predict'),
+      Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -60,7 +60,7 @@ class _DashBoardState extends State<DashBoard> {
     final res = await request.send();
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
-    message = resJson["message"];
+    message = resJson["name"];
     setState(() {});
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
