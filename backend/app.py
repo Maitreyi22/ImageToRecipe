@@ -60,8 +60,22 @@ def upload():
         result=pred
         resJson = recipe_details(result)
         name = resJson['name']
+        recipe = resJson['recipe']
+        ingredients = resJson['ingredients']
+        cuisine = resJson['cuisine']
+        difficultyLevel = resJson['difficulty level']
+        calories = resJson['calories']
+        approxTime = resJson['approx time']
+        imageUrl = resJson['Image']
         return jsonify({
-            "message": name
+            "name": name,
+            "recipe": recipe,
+            "ingredients": ingredients,
+            "cuisine": cuisine,
+            "difficultyLevel": difficultyLevel,
+            "calories": calories,
+            "approxTime": approxTime,
+            "imageUrl": imageUrl
         })
     return None
 
