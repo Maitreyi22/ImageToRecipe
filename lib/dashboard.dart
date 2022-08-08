@@ -20,28 +20,27 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
-// class ImageFile {
-//   //final File? selectedImage;
-//   String? message = '';
-
-//   //ImageFile(this.selectedImage);
-//   ImageFile(this.message);
-// }
-
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
-  String? message = '';
+  String? name = '';
+  // String? difficultyLevel = '';
+  // String? imageUrl = '';
+  // String? ingredients = '';
+  // String? recipe = '';
+  // String? cuisine = '';
+  // String? calories = '';
+  // String? approxTime = '';
+  // String? serving = '';
 
   onUploadImage() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-
       // Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
 
       Uri.parse('http://10.0.2.2:5001/predict'),
@@ -60,7 +59,15 @@ class _DashBoardState extends State<DashBoard> {
     final res = await request.send();
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
-    message = resJson["name"];
+    name = resJson["name"];
+    // recipe = resJson["recipe"];
+    // ingredients = resJson["ingredients"];
+    // cuisine = resJson["cuisine"];
+    // difficultyLevel = resJson["difficultyLevel"];
+    // calories = resJson["calories"];
+    // approxTime = resJson["approxTime"];
+    // imageUrl = resJson["imageUrl"];
+    // serving = resJson["serving"];
     setState(() {});
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
@@ -167,7 +174,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
               top: 120,
               left: 90,
@@ -180,7 +186,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
               top: 90,
               left: 170,
@@ -205,7 +210,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
                 top: 194,
                 right: 45,
@@ -220,7 +224,6 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                   ),
                 )),
-
             Positioned(
                 top: 190,
                 left: 140,
@@ -233,7 +236,6 @@ class _DashBoardState extends State<DashBoard> {
                         NetworkImage(widget.user.photoUrl.toString()),
                   ),
                 )),
-
             Positioned(
               left: MediaQuery.of(context).size.width - 370,
               top: 300,
@@ -279,6 +281,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               top: 640,
+              bottom: 105,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
               child: Container(
@@ -286,14 +289,13 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    onUploadImage();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ReciepePage(name: message!);
-                    }));
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) {
+                    //   return ReciepePage(name: message!);
+                    // }));
                   },
                   child: Card(
-                    //elevation: 30,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                         //side: BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(8)),
@@ -318,6 +320,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               top: 703,
+              bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
               child: Container(
@@ -325,15 +328,26 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => ReciepePage()),
-                    // );
+                    onUploadImage();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return ReciepePage(
+                        name: name!,
+                        // recipe: recipe!,
+                        // ingredients: ingredients!,
+                        // cuisine: cuisine!,
+                        // difficultyLevel: difficultyLevel!,
+                        // calories: calories!,
+                        // approxTime: approxTime!,
+                        // imageUrl: imageUrl!,
+                        // serving: serving!
+                      );
+                    }));
                   },
                   child: Card(
-                    //elevation: 30,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xFFD78915)),
+                        side: const BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.circular(8)),
                     color: Colors.white,
                     child: const Center(
@@ -346,38 +360,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
-            // Positioned(
-            //   top: 580,
-            //   left: MediaQuery.of(context).size.width - 371,
-            //   child: Container(
-            //     width: 345,
-            //     height: 59,
-            //     child: InkWell(
-            //       onTap: () {
-            //         Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (context) =>
-            //                   RegistrationUser(widget.user, widget.signOut)),
-            //         );
-            //       },
-            //       child: Card(
-            //         //elevation: 30,
-            //         shape: RoundedRectangleBorder(
-            //             //side: BorderSide(color: Colors.white),
-            //             borderRadius: BorderRadius.circular(10)),
-            //         color: Colors.deepOrange[800],
-            //         child: const Center(
-            //           child: Text(
-            //             'Upload a photo',
-            //             style: TextStyle(color: Colors.white),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       );

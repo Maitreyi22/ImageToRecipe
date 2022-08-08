@@ -8,9 +8,26 @@ import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
   String name;
+  // String recipe;
+  // String ingredients;
+  // String cuisine;
+  // String difficultyLevel;
+  // String calories;
+  // String approxTime;
+  // String imageUrl;
+  // String serving;
+
   ReciepePage({
     Key? key,
     required this.name,
+    // required this.recipe,
+    // required this.ingredients,
+    // required this.cuisine,
+    // required this.difficultyLevel,
+    // required this.imageUrl,
+    // required this.calories,
+    // required this.approxTime,
+    // required this.serving,
   }) : super(key: key);
 
   @override
@@ -81,10 +98,10 @@ class _RecipePageState extends State<ReciepePage> {
                 margin: const EdgeInsets.only(top: 10, left: 30, right: 10),
                 // width: 120.0,
                 height: 40.0,
-                child: const Text(
-                  "Coffee",
-                  style: TextStyle(
-                      fontSize: 22,
+                child: Text(
+                  widget.name.toString(),
+                  style: const TextStyle(
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black),
                 ),
@@ -100,60 +117,59 @@ class _RecipePageState extends State<ReciepePage> {
               )
             ],
           ),
-          Text(
-            widget.name.toString(),
-            style: const TextStyle(fontSize: 20),
-          ),
 
           Row(
             children: [
               Container(
-                height: 32,
                 margin: const EdgeInsets.only(top: 0, left: 30),
-                child: const SizedBox(
+                child: SizedBox(
                   child: Chip(
                     backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(4),
                     label: Text(
-                      'Easy',
-                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                      // widget.difficultyLevel.toString(),
+                      "Easy",
+                      style: const TextStyle(
+                          fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
                   ),
                 ),
               ),
               Container(
-                height: 32,
                 margin: const EdgeInsets.only(top: 0, left: 15),
-                child: const SizedBox(
+                child: SizedBox(
                   child: Chip(
                     backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(4),
                     label: Text(
-                      'Beverage',
-                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                      // widget.cuisine.toString(),
+                      "Beverage",
+                      style: const TextStyle(
+                          fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
                   ),
                 ),
               ),
               Container(
-                height: 32,
                 margin: const EdgeInsets.only(top: 0, left: 15),
-                child: const SizedBox(
+                child: SizedBox(
                   child: Chip(
                     backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(4),
                     label: Text(
-                      '5k cal',
-                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                      // widget.difficultyLevel.toString(),
+                      "5k cal",
+                      style: const TextStyle(
+                          fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
                   ),
                 ),
@@ -175,15 +191,10 @@ class _RecipePageState extends State<ReciepePage> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10, left: 30),
-            child: const Text(
-              "Coffee powder - 1 teaspoon"
-              "\n"
-              "Milk -  1 Cup"
-              "\n"
-              "Water - 1 Cup"
-              "\n"
-              "Sugar - 2 teaspoon",
-              style: TextStyle(
+            child: Text(
+              // widget.ingredients.toString(),
+              "coffeee,milk",
+              style: const TextStyle(
                 fontSize: 15,
               ),
             ),
@@ -205,35 +216,37 @@ class _RecipePageState extends State<ReciepePage> {
           Row(
             children: [
               Container(
-                height: 32,
                 margin: const EdgeInsets.only(top: 10, left: 30, bottom: 10),
-                child: const SizedBox(
+                child: SizedBox(
                   child: Chip(
                     backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(4),
                     label: Text(
-                      'Serves 1',
-                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                      // widget.serving.toString(),
+                      "1 serve",
+                      style: const TextStyle(
+                          fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
                   ),
                 ),
               ),
               Container(
-                height: 32,
                 margin: const EdgeInsets.only(top: 10, left: 15, bottom: 10),
-                child: const SizedBox(
+                child: SizedBox(
                   child: Chip(
                     backgroundColor: Colors.white,
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: EdgeInsets.all(3),
+                    padding: const EdgeInsets.all(4),
                     label: Text(
-                      '5 mins',
-                      style: TextStyle(fontSize: 14, color: Color(0xFFD78915)),
+                      // widget.approxTime.toString(),
+                      "5 minutes",
+                      style: const TextStyle(
+                          fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
                   ),
                 ),
@@ -242,9 +255,10 @@ class _RecipePageState extends State<ReciepePage> {
           ),
           Container(
             margin: const EdgeInsets.only(top: 10, left: 30, right: 38),
-            child: const Text(
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry.\n When an unknown printer took \na galley of type and scrambled it to make a type specimen book.\n It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-              style: TextStyle(
+            child: Text(
+              // widget.recipe.toString(),
+              "Milk pour",
+              style: const TextStyle(
                 fontSize: 15,
               ),
             ),
@@ -263,14 +277,15 @@ class _RecipePageState extends State<ReciepePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 SizedBox(
-                  height: 45,
-                  width: 180,
+                  height: 47,
+                  width: 183,
                   child: ElevatedButton(
                     onPressed: _launchURLBigBasket,
                     style: ElevatedButton.styleFrom(
-                        primary: Color(0xFFD78915),
+                        elevation: 0,
+                        primary: const Color(0xFFD78915),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+                            borderRadius: BorderRadius.circular(8))),
                     child: const Text(
                       'Order Grocery',
                       // style: TextStyle(color: Colors.black),
@@ -278,16 +293,17 @@ class _RecipePageState extends State<ReciepePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 45,
-                  width: 180,
+                  height: 47,
+                  width: 183,
                   child: ElevatedButton(
                     onPressed: _launchURLZomato,
                     style: ElevatedButton.styleFrom(
+                        elevation: 0,
                         primary: Colors.white,
                         side: const BorderSide(
                             width: 1, color: Color(0xFFD78915)),
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
+                            borderRadius: BorderRadius.circular(8))),
                     child: const Text(
                       'Order Food',
                       style: TextStyle(color: Color(0xFFD78915)),

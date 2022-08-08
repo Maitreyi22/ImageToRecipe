@@ -67,6 +67,9 @@ def upload():
         calories = resJson['calories']
         approxTime = resJson['approx time']
         imageUrl = resJson['Image']
+       
+        # suggestions = resJson['suggestions'][0]
+        # suggestions_name = resJson['suggestions'][1]
         return jsonify({
             "name": name,
             "recipe": recipe,
@@ -75,7 +78,8 @@ def upload():
             "difficultyLevel": difficultyLevel,
             "calories": calories,
             "approxTime": approxTime,
-            "imageUrl": imageUrl
+            "imageUrl": imageUrl,
+            
         })
     return None
 
