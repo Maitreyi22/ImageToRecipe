@@ -72,14 +72,6 @@ def upload():
         # suggestions_name = resJson['suggestions'][1]
         return jsonify({
             "name": name,
-            "recipe": recipe,
-            "ingredients": ingredients,
-            "cuisine": cuisine,
-            "difficultyLevel": difficultyLevel,
-            "calories": calories,
-            "approxTime": approxTime,
-            "imageUrl": imageUrl,
-            
         })
     return None
 

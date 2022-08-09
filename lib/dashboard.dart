@@ -65,8 +65,11 @@ class _DashBoardState extends State<DashBoard> {
     });
 
     // ignore: use_build_context_synchronously
-    // Navigator.push(context,
-    //     MaterialPageRoute(builder: (context) => ReciepePage(message!)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ReciepePage(
+        predictedName: name!,
+      );
+    }));
   }
 
   void _read() async {
@@ -277,6 +280,7 @@ class _DashBoardState extends State<DashBoard> {
             Positioned(
               // top: 640,
               top: 640,
+
               bottom: 105,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
@@ -326,12 +330,6 @@ class _DashBoardState extends State<DashBoard> {
                 child: InkWell(
                   onTap: () {
                     onUploadImage();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ReciepePage(
-                        name: name!,
-                      );
-                    }));
                   },
                   child: Card(
                     elevation: 0,
