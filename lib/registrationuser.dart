@@ -77,8 +77,8 @@ class _RegistrationUserState extends State<RegistrationUser> {
                   height: 30,
                   child: IconButton(
                       onPressed: () {
-                        // Navigator.pop(
-                        //     widget.signOut(), widget.user.clearAuthCache());
+                        Navigator.pop(
+                            widget.signOut(), widget.user.clearAuthCache());
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.arrow_back, size: 35)),

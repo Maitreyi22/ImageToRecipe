@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projectapp/ReciepePage.dart';
+import 'package:projectapp/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:projectapp/registrationuser.dart';
 import 'package:http/http.dart' as http;
@@ -24,17 +26,10 @@ class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
   String? name = '';
-  // String? difficultyLevel = '';
-  // String? imageUrl = '';
-  // String? ingredients = '';
-  // String? recipe = '';
-  // String? cuisine = '';
-  // String? calories = '';
-  // String? approxTime = '';
-  // String? serving = '';
 
   onUploadImage() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -42,7 +37,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://8e64-124-66-170-211.in.ngrok.io/predict'),
+      Uri.parse('https://5581-124-66-170-204.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -61,14 +56,7 @@ class _DashBoardState extends State<DashBoard> {
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
     name = resJson["name"];
-    // recipe = resJson["recipe"];
-    // ingredients = resJson["ingredients"];
-    // cuisine = resJson["cuisine"];
-    // difficultyLevel = resJson["difficultyLevel"];
-    // calories = resJson["calories"];
-    // approxTime = resJson["approxTime"];
-    // imageUrl = resJson["imageUrl"];
-    // serving = resJson["serving"];
+
     setState(() {});
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
@@ -126,9 +114,9 @@ class _DashBoardState extends State<DashBoard> {
                 children: [
                   InkWell(
                     onTap: () {
+                      Navigator.pop(
+                          widget.signOut(), widget.user.clearAuthCache());
                       Navigator.pop(context);
-                      widget.signOut();
-                      widget.user.clearAuthCache();
                     },
                     child: Row(
                       children: [
@@ -334,14 +322,6 @@ class _DashBoardState extends State<DashBoard> {
                         MaterialPageRoute(builder: (context) {
                       return ReciepePage(
                         name: name!,
-                        // recipe: recipe!,
-                        // ingredients: ingredients!,
-                        // cuisine: cuisine!,
-                        // difficultyLevel: difficultyLevel!,
-                        // calories: calories!,
-                        // approxTime: approxTime!,
-                        // imageUrl: imageUrl!,
-                        // serving: serving!
                       );
                     }));
                   },
@@ -372,7 +352,24 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
         body: ConstrainedBox(
       constraints: const BoxConstraints.expand(),
-      child: _buildBody(),
+      child: isWorking
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                  child: Container(
+                      height: 30,
+                      width: 30,
+                      margin: EdgeInsets.all(5),
+                      child: const CircularProgressIndicator(
+                        strokeWidth: 3,
+                        color: Color(0xFFD78915),
+                      )),
+                ),
+              ],
+            )
+          : _buildBody(),
     ));
   }
 }

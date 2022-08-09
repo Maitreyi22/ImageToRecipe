@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
@@ -8,26 +9,10 @@ import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
   String name;
-  // String recipe;
-  // String ingredients;
-  // String cuisine;
-  // String difficultyLevel;
-  // String calories;
-  // String approxTime;
-  // String imageUrl;
-  // String serving;
 
   ReciepePage({
     Key? key,
     required this.name,
-    // required this.recipe,
-    // required this.ingredients,
-    // required this.cuisine,
-    // required this.difficultyLevel,
-    // required this.imageUrl,
-    // required this.calories,
-    // required this.approxTime,
-    // required this.serving,
   }) : super(key: key);
 
   @override
@@ -35,9 +20,42 @@ class ReciepePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<ReciepePage> {
-  // String? get name => null;
+  String? imageUrl;
+  String? name;
+  String? difficultyLevel;
+  String? cuisine;
+  String? calories;
+  String? ingredients;
+  String? serving;
+  String? approxTime;
+  String? recipe;
 
-  // get age => null;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readMyRecipe();
+  }
+
+  void readMyRecipe() async {
+    DocumentSnapshot documentSnapshot;
+    documentSnapshot =
+        await FirebaseFirestore.instance.collection('recipes').doc(name).get();
+
+    setState(() {
+      imageUrl = (documentSnapshot.data() as dynamic)['Image'];
+      name = (documentSnapshot.data() as dynamic)['name'];
+      difficultyLevel =
+          (documentSnapshot.data() as dynamic)['difficulty level'];
+      recipe = (documentSnapshot.data() as dynamic)['recipe'];
+      cuisine = (documentSnapshot.data() as dynamic)['cuisine'];
+      calories = (documentSnapshot.data() as dynamic)['calories'];
+      ingredients = (documentSnapshot.data() as dynamic)['ingredients'];
+      serving = (documentSnapshot.data() as dynamic)['serving'];
+      approxTime = (documentSnapshot.data() as dynamic)['approx time'];
+      recipe = (documentSnapshot.data() as dynamic)['recipe'];
+    });
+  }
 
   _launchURLZomato() async {
     var url = Uri.parse("https://www.zomato.com/");
@@ -83,12 +101,12 @@ class _RecipePageState extends State<ReciepePage> {
             ],
           ),
           Container(
+            height: 250,
             margin: const EdgeInsets.only(top: 10, left: 30, right: 30),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
-              child: const Image(
-                image: NetworkImage(
-                    'https://i.picsum.photos/id/1060/5598/3732.jpg?hmac=31kU0jp5ejnPTdEt-8tAXU5sE-buU-y1W1qk_BsiUC8'),
+              child: Image(
+                image: NetworkImage(imageUrl!),
               ),
             ),
           ),
@@ -99,7 +117,7 @@ class _RecipePageState extends State<ReciepePage> {
                 // width: 120.0,
                 height: 40.0,
                 child: Text(
-                  widget.name.toString(),
+                  name!,
                   style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -131,7 +149,7 @@ class _RecipePageState extends State<ReciepePage> {
                     padding: const EdgeInsets.all(4),
                     label: Text(
                       // widget.difficultyLevel.toString(),
-                      "Easy",
+                      difficultyLevel!,
                       style: const TextStyle(
                           fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
@@ -149,7 +167,7 @@ class _RecipePageState extends State<ReciepePage> {
                     padding: const EdgeInsets.all(4),
                     label: Text(
                       // widget.cuisine.toString(),
-                      "Beverage",
+                      cuisine!,
                       style: const TextStyle(
                           fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
@@ -167,7 +185,7 @@ class _RecipePageState extends State<ReciepePage> {
                     padding: const EdgeInsets.all(4),
                     label: Text(
                       // widget.difficultyLevel.toString(),
-                      "5k cal",
+                      calories!,
                       style: const TextStyle(
                           fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
@@ -183,17 +201,17 @@ class _RecipePageState extends State<ReciepePage> {
           ),
           //Chip
           Container(
-            margin: const EdgeInsets.only(top: 0, left: 30),
+            margin: const EdgeInsets.only(top: 0, left: 30, right: 40),
             child: const Text(
               "Ingredients",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
           Container(
-            margin: const EdgeInsets.only(top: 10, left: 30),
+            margin: const EdgeInsets.only(top: 10, left: 30, right: 28),
             child: Text(
               // widget.ingredients.toString(),
-              "coffeee,milk",
+              ingredients!,
               style: const TextStyle(
                 fontSize: 15,
               ),
@@ -226,7 +244,7 @@ class _RecipePageState extends State<ReciepePage> {
                     padding: const EdgeInsets.all(4),
                     label: Text(
                       // widget.serving.toString(),
-                      "1 serve",
+                      serving!,
                       style: const TextStyle(
                           fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
@@ -244,7 +262,7 @@ class _RecipePageState extends State<ReciepePage> {
                     padding: const EdgeInsets.all(4),
                     label: Text(
                       // widget.approxTime.toString(),
-                      "5 minutes",
+                      approxTime!,
                       style: const TextStyle(
                           fontSize: 14, color: Color(0xFFD78915)),
                     ), //Text
@@ -257,7 +275,7 @@ class _RecipePageState extends State<ReciepePage> {
             margin: const EdgeInsets.only(top: 10, left: 30, right: 38),
             child: Text(
               // widget.recipe.toString(),
-              "Milk pour",
+              recipe!,
               style: const TextStyle(
                 fontSize: 15,
               ),
