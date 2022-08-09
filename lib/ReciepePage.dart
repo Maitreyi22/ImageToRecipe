@@ -38,8 +38,10 @@ class _RecipePageState extends State<ReciepePage> {
 
   void readMyRecipe() async {
     DocumentSnapshot documentSnapshot;
-    documentSnapshot =
-        await FirebaseFirestore.instance.collection('recipes').doc(name).get();
+    documentSnapshot = await FirebaseFirestore.instance
+        .collection('recipes')
+        .doc('Pizza')
+        .get();
 
     setState(() {
       imageUrl = (documentSnapshot.data() as dynamic)['Image'];
