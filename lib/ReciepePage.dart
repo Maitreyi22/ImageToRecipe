@@ -1,33 +1,17 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
-
 import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
   String name;
-  // String recipe;
-  // String ingredients;
-  // String cuisine;
-  // String difficultyLevel;
-  // String calories;
-  // String approxTime;
-  // String imageUrl;
-  // String serving;
 
   ReciepePage({
     Key? key,
     required this.name,
-    // required this.recipe,
-    // required this.ingredients,
-    // required this.cuisine,
-    // required this.difficultyLevel,
-    // required this.imageUrl,
-    // required this.calories,
-    // required this.approxTime,
-    // required this.serving,
   }) : super(key: key);
 
   @override
@@ -35,10 +19,6 @@ class ReciepePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<ReciepePage> {
-  // String? get name => null;
-
-  // get age => null;
-
   _launchURLZomato() async {
     var url = Uri.parse("https://www.zomato.com/");
     if (await canLaunchUrl(url)) {

@@ -27,21 +27,13 @@ class _DashBoardState extends State<DashBoard> {
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
   String? name = '';
-  // String? difficultyLevel = '';
-  // String? imageUrl = '';
-  // String? ingredients = '';
-  // String? recipe = '';
-  // String? cuisine = '';
-  // String? calories = '';
-  // String? approxTime = '';
-  // String? serving = '';
 
   onUploadImage() async {
     var image = await ImagePicker().pickImage(source: ImageSource.gallery);
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      // Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
+      // Uri.parse('https://f7d5-59-88-21-251.in.ngrok.io/predict'),
 
       Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -59,16 +51,9 @@ class _DashBoardState extends State<DashBoard> {
     final res = await request.send();
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
-    name = resJson["name"];
-    // recipe = resJson["recipe"];
-    // ingredients = resJson["ingredients"];
-    // cuisine = resJson["cuisine"];
-    // difficultyLevel = resJson["difficultyLevel"];
-    // calories = resJson["calories"];
-    // approxTime = resJson["approxTime"];
-    // imageUrl = resJson["imageUrl"];
-    // serving = resJson["serving"];
-    setState(() {});
+    setState(() {
+      name = resJson["name"];
+    });
     // ignore: use_build_context_synchronously
     // Navigator.push(context,
     //     MaterialPageRoute(builder: (context) => ReciepePage(message!)));
@@ -333,14 +318,6 @@ class _DashBoardState extends State<DashBoard> {
                         MaterialPageRoute(builder: (context) {
                       return ReciepePage(
                         name: name!,
-                        // recipe: recipe!,
-                        // ingredients: ingredients!,
-                        // cuisine: cuisine!,
-                        // difficultyLevel: difficultyLevel!,
-                        // calories: calories!,
-                        // approxTime: approxTime!,
-                        // imageUrl: imageUrl!,
-                        // serving: serving!
                       );
                     }));
                   },
