@@ -7,11 +7,11 @@ import 'package:http/http.dart' as http;
 import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
-  String name;
+  String? predictedName;
 
   ReciepePage({
     Key? key,
-    required this.name,
+    required this.predictedName,
   }) : super(key: key);
 
   @override
@@ -38,8 +38,10 @@ class _RecipePageState extends State<ReciepePage> {
 
   void readMyRecipe() async {
     DocumentSnapshot documentSnapshot;
-    documentSnapshot =
-        await FirebaseFirestore.instance.collection('recipes').doc(name).get();
+    documentSnapshot = await FirebaseFirestore.instance
+        .collection('recipes')
+        .doc(widget.predictedName.toString())
+        .get();
 
     setState(() {
       imageUrl = (documentSnapshot.data() as dynamic)['Image'];
