@@ -40,6 +40,9 @@ class _RecipePageState extends State<ReciepePage> {
     DocumentSnapshot documentSnapshot;
     documentSnapshot = await FirebaseFirestore.instance
         .collection('recipes')
+
+        // .doc('Pizza')
+
         .doc(widget.predictedName.toString())
         .get();
 
