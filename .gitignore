@@ -48,5 +48,5 @@ app.*.map.json
 
 #Model files
 backend/Model/model_v1_inceptionV3.h5
-
+backend/Images
 backend/serviceAccountKey.json
