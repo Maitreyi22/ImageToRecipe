@@ -60,16 +60,6 @@ def upload():
         result=pred
         resJson = recipe_details(result)
         name = resJson['name']
-        recipe = resJson['recipe']
-        ingredients = resJson['ingredients']
-        cuisine = resJson['cuisine']
-        difficultyLevel = resJson['difficulty level']
-        calories = resJson['calories']
-        approxTime = resJson['approx time']
-        imageUrl = resJson['Image']
-       
-        # suggestions = resJson['suggestions'][0]
-        # suggestions_name = resJson['suggestions'][1]
         return jsonify({
             "name": name,
         })

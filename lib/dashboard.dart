@@ -31,8 +31,8 @@ class _DashBoardState extends State<DashBoard> {
   File? selectedImage;
   String? name = '';
 
-  onUploadImage() async {
-    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  onUploadImage(source) async {
+    var image = await ImagePicker().pickImage(source: source);
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
@@ -79,7 +79,6 @@ class _DashBoardState extends State<DashBoard> {
           .collection('users')
           .doc(widget.user.email.toString())
           .get();
-      print(documentSnapshot.data());
       if (documentSnapshot.data() != null) {
         setState(() {
           isUser = true;
@@ -289,10 +288,7 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(context,
-                    //     MaterialPageRoute(builder: (context) {
-                    //   return ReciepePage(name: message!);
-                    // }));
+                    onUploadImage(ImageSource.camera);
                   },
                   child: Card(
                     elevation: 0,
@@ -301,14 +297,6 @@ class _DashBoardState extends State<DashBoard> {
                         borderRadius: BorderRadius.circular(8)),
                     color: Color(0xFFD78915),
                     child: const Center(
-                      // child: Column(
-                      //   children: <Widget>[
-                      //     selectedImage == null
-                      //         ? const Text(' \n Take a photo',
-                      //             style: const TextStyle(color: Colors.white))
-                      //         : Text(message!)
-                      //   ],
-                      // ),
                       child: Text(
                         'Take a photo',
                         style: TextStyle(color: Colors.white),
@@ -329,7 +317,7 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    onUploadImage();
+                    onUploadImage(ImageSource.gallery);
                   },
                   child: Card(
                     elevation: 0,
