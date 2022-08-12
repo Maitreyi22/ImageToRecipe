@@ -37,9 +37,51 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://e4c1-124-66-170-204.in.ngrok.io/predict'),
+      // Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
 
-      // Uri.parse('http://10.0.2.2:5001/predict'),
+      Uri.parse('http://10.0.2.2:5001/predict'),
+    );
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        selectedImage!.readAsBytes().asStream(),
+        selectedImage!.lengthSync(),
+        filename: selectedImage!.path.split('/').last,
+      ),
+    );
+    request.headers.addAll(headers);
+    print("request: $request");
+    final res = await request.send();
+    http.Response response = await http.Response.fromStream(res);
+    final resJson = jsonDecode(response.body);
+
+    name = resJson["name"];
+
+    setState(() {});
+
+    setState(() {
+      name = resJson["name"];
+    });
+
+    // ignore: use_build_context_synchronously
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ReciepePage(
+        predictedName: name!,
+      );
+    }));
+  }
+
+  onCameraImage(source) async {
+    var image = await ImagePicker()
+        .pickImage(imageQuality: 90, source: ImageSource.camera);
+    selectedImage = File(image!.path);
+    var request = http.MultipartRequest(
+      'POST',
+
+      // Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
+
+      Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -288,7 +330,7 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    onUploadImage(ImageSource.camera);
+                    onCameraImage(ImageSource.camera);
                   },
                   child: Card(
                     elevation: 0,
@@ -308,7 +350,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               //top: 703,
-              top: 703,
+              top: 600,
               bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,

@@ -19,6 +19,7 @@ class ReciepePage extends StatefulWidget {
 }
 
 class _RecipePageState extends State<ReciepePage> {
+  bool isWorking = true;
   String? imageUrl;
   String? name;
   String? difficultyLevel;
@@ -28,6 +29,7 @@ class _RecipePageState extends State<ReciepePage> {
   String? serving;
   String? approxTime;
   String? recipe;
+  var suggestions = [];
 
   @override
   void initState() {
@@ -40,9 +42,6 @@ class _RecipePageState extends State<ReciepePage> {
     DocumentSnapshot documentSnapshot;
     documentSnapshot = await FirebaseFirestore.instance
         .collection('recipes')
-
-        // .doc('Pizza')
-
         .doc(widget.predictedName.toString())
         .get();
 
@@ -58,12 +57,11 @@ class _RecipePageState extends State<ReciepePage> {
       serving = (documentSnapshot.data() as dynamic)['serving'];
       approxTime = (documentSnapshot.data() as dynamic)['approx time'];
       recipe = (documentSnapshot.data() as dynamic)['recipe'];
+      suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
+    });
 
-      // First create this variable, it'll store the array in this variable
-      // suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
-      // Then access this variable as array
-      // Like this suggestions[0] for name or image
-      // Like this suggestions[1] for name or image
+    setState(() {
+      isWorking = false;
     });
   }
 
@@ -87,9 +85,34 @@ class _RecipePageState extends State<ReciepePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String>? result_ing = ingredients?.split('*');
+    var stringList_ing = result_ing!.join(" \n\n");
+
+    List<String>? result_rec = recipe?.split('*');
+    var stringList_rec = result_rec!.join(" \n\n");
+
     return Scaffold(
       body: SafeArea(
-          child: ListView(
+          child:
+              //  isWorking
+              //     ? Column(
+              //         crossAxisAlignment: CrossAxisAlignment.center,
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: <Widget>[
+              //           Center(
+              //             child: Container(
+              //                 height: 30,
+              //                 width: 30,
+              //                 margin: EdgeInsets.all(5),
+              //                 child: const CircularProgressIndicator(
+              //                   strokeWidth: 3,
+              //                   color: Color(0xFFD78915),
+              //                 )),
+              //           ),
+              //         ],
+              //       )
+              ListView(
+        scrollDirection: Axis.vertical,
         children: [
           Row(
             children: [
@@ -104,14 +127,13 @@ class _RecipePageState extends State<ReciepePage> {
                     icon: const Icon(Icons.arrow_back, size: 29)),
               ),
               Container(
-                  margin: const EdgeInsets.only(top: 25, left: 265, bottom: 5),
+                  margin: const EdgeInsets.only(top: 30, left: 265, bottom: 0),
                   alignment: Alignment.topLeft,
                   height: 22,
                   child: Image.asset("images/heart.png", color: Colors.black)),
             ],
           ),
           Container(
-            height: 250,
             margin: const EdgeInsets.only(top: 10, left: 30, right: 30),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
@@ -146,63 +168,65 @@ class _RecipePageState extends State<ReciepePage> {
             ],
           ),
 
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(top: 0, left: 30),
-                child: SizedBox(
-                  child: Chip(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xFFD78915)),
-                        borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: const EdgeInsets.all(4),
-                    label: Text(
-                      // widget.difficultyLevel.toString(),
-                      difficultyLevel!,
-                      style: const TextStyle(
-                          fontSize: 14, color: Color(0xFFD78915)),
-                    ), //Text
+          Container(
+            margin: const EdgeInsets.only(top: 0, left: 30),
+            child: Wrap(
+              spacing: 15,
+              children: [
+                Container(
+                  child: SizedBox(
+                    child: Chip(
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          side: BorderSide(color: Color(0xFFD78915)),
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      padding: const EdgeInsets.all(4),
+                      label: Text(
+                        // widget.difficultyLevel.toString(),
+                        difficultyLevel!,
+                        style: const TextStyle(
+                            fontSize: 14, color: Color(0xFFD78915)),
+                      ), //Text
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 0, left: 15),
-                child: SizedBox(
-                  child: Chip(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xFFD78915)),
-                        borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: const EdgeInsets.all(4),
-                    label: Text(
-                      // widget.cuisine.toString(),
-                      cuisine!,
-                      style: const TextStyle(
-                          fontSize: 14, color: Color(0xFFD78915)),
-                    ), //Text
+                Container(
+                  child: SizedBox(
+                    child: Chip(
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          side: BorderSide(color: Color(0xFFD78915)),
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      padding: const EdgeInsets.all(4),
+                      label: Text(
+                        // widget.cuisine.toString(),
+                        cuisine!,
+                        style: const TextStyle(
+                            fontSize: 14, color: Color(0xFFD78915)),
+                      ), //Text
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 0, left: 15),
-                child: SizedBox(
-                  child: Chip(
-                    backgroundColor: Colors.white,
-                    shape: const RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xFFD78915)),
-                        borderRadius: BorderRadius.all(Radius.circular(4))),
-                    padding: const EdgeInsets.all(4),
-                    label: Text(
-                      // widget.difficultyLevel.toString(),
-                      calories!,
-                      style: const TextStyle(
-                          fontSize: 14, color: Color(0xFFD78915)),
-                    ), //Text
+                Container(
+                  // margin: const EdgeInsets.only(top: 0, left: 15),
+                  child: SizedBox(
+                    child: Chip(
+                      backgroundColor: Colors.white,
+                      shape: const RoundedRectangleBorder(
+                          side: BorderSide(color: Color(0xFFD78915)),
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      padding: const EdgeInsets.all(4),
+                      label: Text(
+                        // widget.difficultyLevel.toString(),
+                        calories!,
+                        style: const TextStyle(
+                            fontSize: 14, color: Color(0xFFD78915)),
+                      ), //Text
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           const Divider(
             height: 35,
@@ -213,15 +237,17 @@ class _RecipePageState extends State<ReciepePage> {
           Container(
             margin: const EdgeInsets.only(top: 0, left: 30, right: 40),
             child: const Text(
-              "Ingredients",
+              "Ingredients\n",
               style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
             ),
           ),
+
           Container(
             margin: const EdgeInsets.only(top: 10, left: 30, right: 28),
             child: Text(
               // widget.ingredients.toString(),
-              ingredients!,
+              " $stringList_ing",
+              textAlign: TextAlign.left,
               style: const TextStyle(
                 fontSize: 15,
               ),
@@ -281,20 +307,61 @@ class _RecipePageState extends State<ReciepePage> {
               ),
             ],
           ),
+
           Container(
             margin: const EdgeInsets.only(top: 10, left: 30, right: 38),
             child: Text(
               // widget.recipe.toString(),
-              recipe!,
+              " $stringList_rec",
+              textAlign: TextAlign.left,
               style: const TextStyle(
                 fontSize: 15,
               ),
             ),
           ),
+
           const Divider(
-            height: 35,
+            height: 30,
             thickness: 2,
             color: Color(0xFFF2F2F2),
+          ),
+
+          Container(
+            margin: const EdgeInsets.only(top: 0, left: 30),
+            child: const Text(
+              "Recommendations for you",
+              style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            ),
+          ),
+
+          SizedBox(
+            height: 28,
+          ),
+
+          Container(
+            margin: const EdgeInsets.only(top: 0, left: 30),
+            child: Stack(
+              children: [
+                Positioned(
+                  child: Container(
+                    height: 210,
+                    width: 190,
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                    ),
+                    // child: Text('image')))
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Image(
+                        image: NetworkImage(suggestions[0]),
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
 
           Container(
