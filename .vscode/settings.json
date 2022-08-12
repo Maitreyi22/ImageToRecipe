@@ -1,5 +1,4 @@
 {
-    "cSpell.words": [
-        "successnackbar"
-    ]
+  "cSpell.words": ["successnackbar"],
+  "cmake.configureOnOpen": false
 }

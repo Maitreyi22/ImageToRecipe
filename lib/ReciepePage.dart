@@ -58,6 +58,12 @@ class _RecipePageState extends State<ReciepePage> {
       serving = (documentSnapshot.data() as dynamic)['serving'];
       approxTime = (documentSnapshot.data() as dynamic)['approx time'];
       recipe = (documentSnapshot.data() as dynamic)['recipe'];
+
+      // First create this variable, it'll store the array in this variable
+      // suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
+      // Then access this variable as array
+      // Like this suggestions[0] for name or image
+      // Like this suggestions[1] for name or image
     });
   }
 
