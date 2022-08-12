@@ -29,7 +29,7 @@ class _RecipePageState extends State<ReciepePage> {
   String? serving;
   String? approxTime;
   String? recipe;
-  String? suggestions;
+  var suggestions = [];
 
   @override
   void initState() {
@@ -42,9 +42,6 @@ class _RecipePageState extends State<ReciepePage> {
     DocumentSnapshot documentSnapshot;
     documentSnapshot = await FirebaseFirestore.instance
         .collection('recipes')
-
-        // .doc('Pizza')
-
         .doc(widget.predictedName.toString())
         .get();
 
@@ -346,21 +343,23 @@ class _RecipePageState extends State<ReciepePage> {
             child: Stack(
               children: [
                 Positioned(
-                    child: Container(
-                        height: 210,
-                        width: 190,
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 1, color: Colors.grey),
-                          borderRadius: BorderRadius.all(Radius.circular(4)),
-                        ),
-                        child: Text('image')))
-                //      child: ClipRRect(
-                //   borderRadius: BorderRadius.circular(4),
-                //   child: Image(
-                //     image: NetworkImage(suggestions![0]),
-                //   ),
-                // ),
+                  child: Container(
+                    height: 210,
+                    width: 190,
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.grey),
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                    ),
+                    // child: Text('image')))
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(4),
+                      child: Image(
+                        image: NetworkImage(suggestions[0]),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

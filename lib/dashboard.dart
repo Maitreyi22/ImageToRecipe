@@ -37,9 +37,9 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
+      // Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
 
-      // Uri.parse('http://10.0.2.2:5001/predict'),
+      Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -79,9 +79,9 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
+      // Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
 
-      // Uri.parse('http://10.0.2.2:5001/predict'),
+      Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -350,7 +350,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               //top: 703,
-              top: 703,
+              top: 600,
               bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
