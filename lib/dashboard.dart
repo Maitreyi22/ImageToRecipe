@@ -109,7 +109,7 @@ class _DashBoardState extends State<DashBoard> {
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ReciepePage(
-        predictedName: name!,
+        predictedName: name,
       );
     }));
   }
