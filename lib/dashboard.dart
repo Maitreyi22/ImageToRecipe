@@ -29,7 +29,7 @@ class _DashBoardState extends State<DashBoard> {
 
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
-  String? name = '';
+  String name = '';
 
   onUploadImage(source) async {
     var image = await ImagePicker().pickImage(source: source);
@@ -58,7 +58,7 @@ class _DashBoardState extends State<DashBoard> {
 
     name = resJson["name"];
 
-    setState(() {});
+    // setState(() {});
 
     setState(() {
       name = resJson["name"];
@@ -67,7 +67,7 @@ class _DashBoardState extends State<DashBoard> {
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ReciepePage(
-        predictedName: name!,
+        predictedName: name,
       );
     }));
   }
@@ -79,9 +79,9 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      // Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
+      Uri.parse('https://e940-219-91-178-198.in.ngrok.io/predict'),
 
-      Uri.parse('http://10.0.2.2:5001/predict'),
+      // Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -350,7 +350,7 @@ class _DashBoardState extends State<DashBoard> {
             ),
             Positioned(
               //top: 703,
-              top: 600,
+              top: 703,
               bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,

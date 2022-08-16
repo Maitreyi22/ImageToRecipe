@@ -20,7 +20,7 @@ class ReciepePage extends StatefulWidget {
 
 class _RecipePageState extends State<ReciepePage> {
   bool isWorking = true;
-  String? imageUrl;
+  late String imageUrl;
   String? name;
   String? difficultyLevel;
   String? cuisine;
@@ -94,7 +94,7 @@ class _RecipePageState extends State<ReciepePage> {
     return Scaffold(
       body: SafeArea(
           child:
-              //  isWorking
+              // isWorking
               //     ? Column(
               //         crossAxisAlignment: CrossAxisAlignment.center,
               //         mainAxisAlignment: MainAxisAlignment.center,
@@ -127,10 +127,13 @@ class _RecipePageState extends State<ReciepePage> {
                     icon: const Icon(Icons.arrow_back, size: 29)),
               ),
               Container(
-                  margin: const EdgeInsets.only(top: 30, left: 265, bottom: 0),
-                  alignment: Alignment.topLeft,
-                  height: 22,
-                  child: Image.asset("images/heart.png", color: Colors.black)),
+                margin: const EdgeInsets.only(top: 30, left: 265, bottom: 0),
+                alignment: Alignment.topLeft,
+                height: 22,
+                child: InkWell(
+                    child:
+                        Image.asset("images/heart.png", color: Colors.black)),
+              )
             ],
           ),
           Container(
@@ -138,7 +141,7 @@ class _RecipePageState extends State<ReciepePage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: Image(
-                image: NetworkImage(imageUrl!),
+                image: NetworkImage(imageUrl),
               ),
             ),
           ),
