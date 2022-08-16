@@ -22,7 +22,7 @@ class ReciepePage extends StatefulWidget {
 
 class _RecipePageState extends State<ReciepePage> {
   bool isWorking = true;
-  String? imageUrl;
+  late String imageUrl;
   String? name;
   String? difficultyLevel;
   String? cuisine;
@@ -133,7 +133,7 @@ class _RecipePageState extends State<ReciepePage> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(4),
                           child: Image(
-                            image: NetworkImage(imageUrl!),
+                            image: NetworkImage(imageUrl),
                           ),
                         ),
                       ),
@@ -163,7 +163,6 @@ class _RecipePageState extends State<ReciepePage> {
                           )
                         ],
                       ),
-
                       Container(
                         margin: const EdgeInsets.only(top: 0, left: 30),
                         child: Wrap(
