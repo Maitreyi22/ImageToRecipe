@@ -37,7 +37,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      // Uri.parse('https://a8fa-124-66-170-219.in.ngrok.io/predict'),
+      // Uri.parse('https://f4d2-124-66-170-196.in.ngrok.io/predict'),
 
       Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -58,8 +58,6 @@ class _DashBoardState extends State<DashBoard> {
 
     name = resJson["name"];
 
-    // setState(() {});
-
     setState(() {
       name = resJson["name"];
     });
@@ -68,6 +66,7 @@ class _DashBoardState extends State<DashBoard> {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ReciepePage(
         predictedName: name,
+        user: widget.user,
       );
     }));
   }
@@ -78,7 +77,6 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-
       Uri.parse('https://e940-219-91-178-198.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
@@ -100,7 +98,9 @@ class _DashBoardState extends State<DashBoard> {
 
     name = resJson["name"];
 
-    setState(() {});
+    // setState(() {
+    //   isWorking = false;
+    // });
 
     setState(() {
       name = resJson["name"];
@@ -108,9 +108,7 @@ class _DashBoardState extends State<DashBoard> {
 
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ReciepePage(
-        predictedName: name,
-      );
+      return ReciepePage(predictedName: name, user: widget.user);
     }));
   }
 
@@ -321,7 +319,6 @@ class _DashBoardState extends State<DashBoard> {
             Positioned(
               // top: 640,
               top: 640,
-
               bottom: 105,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
