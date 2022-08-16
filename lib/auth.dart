@@ -125,9 +125,9 @@ class _AuthState extends State<Auth> {
 
           const Positioned(
               top: 200,
-              left: 100,
+              left: 80,
               child: Text(
-                "What",
+                "The Food",
                 style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
@@ -136,9 +136,9 @@ class _AuthState extends State<Auth> {
 
           const Positioned(
               top: 200,
-              left: 200,
+              left: 238,
               child: Text(
-                "Name",
+                "Map",
                 style: TextStyle(
                     fontSize: 35,
                     fontWeight: FontWeight.bold,
