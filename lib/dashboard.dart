@@ -29,7 +29,7 @@ class _DashBoardState extends State<DashBoard> {
 
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
-  String? name = '';
+  String name = '';
 
   onUploadImage(source) async {
     var image = await ImagePicker().pickImage(source: source);
@@ -58,10 +58,6 @@ class _DashBoardState extends State<DashBoard> {
 
     name = resJson["name"];
 
-    // setState(() {
-    //   isWorking = false;
-    // });
-
     setState(() {
       name = resJson["name"];
     });
@@ -69,7 +65,7 @@ class _DashBoardState extends State<DashBoard> {
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return ReciepePage(
-        predictedName: name!,
+        predictedName: name,
         user: widget.user,
       );
     }));
@@ -81,8 +77,7 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-
-      Uri.parse('https://f4d2-124-66-170-196.in.ngrok.io/predict'),
+      Uri.parse('https://e940-219-91-178-198.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -113,7 +108,7 @@ class _DashBoardState extends State<DashBoard> {
 
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ReciepePage(predictedName: name!, user: widget.user);
+      return ReciepePage(predictedName: name, user: widget.user);
     }));
   }
 
