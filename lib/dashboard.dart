@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:projectapp/ReciepePage.dart';
+import 'package:projectapp/auth.dart';
 import 'package:provider/provider.dart';
 import 'package:projectapp/registrationuser.dart';
 import 'package:http/http.dart' as http;
@@ -20,29 +22,62 @@ class DashBoard extends StatefulWidget {
   State<DashBoard> createState() => _DashBoardState();
 }
 
-// class ImageFile {
-//   //final File? selectedImage;
-//   String? message = '';
-
-//   //ImageFile(this.selectedImage);
-//   ImageFile(this.message);
-// }
-
 class _DashBoardState extends State<DashBoard> {
   bool isUser = false;
   bool isWorking = true;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   File? selectedImage;
-  String? message = '';
+  String name = '';
 
-  onUploadImage() async {
-    var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  onUploadImage(source) async {
+    var image = await ImagePicker().pickImage(source: source);
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://aec8-124-66-170-211.in.ngrok.io/predict'),
+      Uri.parse('https://ac11-124-66-170-196.in.ngrok.io/predict'),
+
+      //Uri.parse('http://10.0.2.2:5001/predict'),
+    );
+    Map<String, String> headers = {"Content-type": "multipart/form-data"};
+    request.files.add(
+      http.MultipartFile(
+        'image',
+        selectedImage!.readAsBytes().asStream(),
+        selectedImage!.lengthSync(),
+        filename: selectedImage!.path.split('/').last,
+      ),
+    );
+    request.headers.addAll(headers);
+    print("request: $request");
+    final res = await request.send();
+    http.Response response = await http.Response.fromStream(res);
+    final resJson = jsonDecode(response.body);
+
+    name = resJson["name"];
+
+    setState(() {
+      name = resJson["name"];
+    });
+
+    // ignore: use_build_context_synchronously
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ReciepePage(
+        predictedName: name,
+        user: widget.user,
+      );
+    }));
+  }
+
+  onCameraImage(source) async {
+    var image = await ImagePicker()
+        .pickImage(imageQuality: 90, source: ImageSource.camera);
+    selectedImage = File(image!.path);
+    var request = http.MultipartRequest(
+      'POST',
+      Uri.parse('https://e940-219-91-178-198.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -60,11 +95,21 @@ class _DashBoardState extends State<DashBoard> {
     final res = await request.send();
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
-    message = resJson["message"];
-    setState(() {});
+
+    name = resJson["name"];
+
+    // setState(() {
+    //   isWorking = false;
+    // });
+
+    setState(() {
+      name = resJson["name"];
+    });
+
     // ignore: use_build_context_synchronously
-    // Navigator.push(context,
-    //     MaterialPageRoute(builder: (context) => ReciepePage(message!)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ReciepePage(predictedName: name, user: widget.user);
+    }));
   }
 
   void _read() async {
@@ -74,7 +119,6 @@ class _DashBoardState extends State<DashBoard> {
           .collection('users')
           .doc(widget.user.email.toString())
           .get();
-      print(documentSnapshot.data());
       if (documentSnapshot.data() != null) {
         setState(() {
           isUser = true;
@@ -118,9 +162,9 @@ class _DashBoardState extends State<DashBoard> {
                 children: [
                   InkWell(
                     onTap: () {
+                      Navigator.pop(
+                          widget.signOut(), widget.user.clearAuthCache());
                       Navigator.pop(context);
-                      widget.signOut();
-                      widget.user.clearAuthCache();
                     },
                     child: Row(
                       children: [
@@ -167,7 +211,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
               top: 120,
               left: 90,
@@ -180,7 +223,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
               top: 90,
               left: 170,
@@ -205,7 +247,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
             Positioned(
                 top: 194,
                 right: 45,
@@ -220,7 +261,6 @@ class _DashBoardState extends State<DashBoard> {
                     ),
                   ),
                 )),
-
             Positioned(
                 top: 190,
                 left: 140,
@@ -233,7 +273,6 @@ class _DashBoardState extends State<DashBoard> {
                         NetworkImage(widget.user.photoUrl.toString()),
                   ),
                 )),
-
             Positioned(
               left: MediaQuery.of(context).size.width - 370,
               top: 300,
@@ -278,7 +317,9 @@ class _DashBoardState extends State<DashBoard> {
               ),
             ),
             Positioned(
+              // top: 640,
               top: 640,
+              bottom: 105,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
               child: Container(
@@ -286,27 +327,15 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    onUploadImage();
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) {
-                      return ReciepePage(name: message!);
-                    }));
+                    onCameraImage(ImageSource.camera);
                   },
                   child: Card(
-                    //elevation: 30,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                         //side: BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(8)),
                     color: Color(0xFFD78915),
                     child: const Center(
-                      // child: Column(
-                      //   children: <Widget>[
-                      //     selectedImage == null
-                      //         ? const Text(' \n Take a photo',
-                      //             style: const TextStyle(color: Colors.white))
-                      //         : Text(message!)
-                      //   ],
-                      // ),
                       child: Text(
                         'Take a photo',
                         style: TextStyle(color: Colors.white),
@@ -317,7 +346,9 @@ class _DashBoardState extends State<DashBoard> {
               ),
             ),
             Positioned(
+              //top: 703,
               top: 703,
+              bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
               child: Container(
@@ -325,15 +356,12 @@ class _DashBoardState extends State<DashBoard> {
                 height: 60,
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => ReciepePage()),
-                    // );
+                    onUploadImage(ImageSource.gallery);
                   },
                   child: Card(
-                    //elevation: 30,
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Color(0xFFD78915)),
+                        side: const BorderSide(color: Color(0xFFD78915)),
                         borderRadius: BorderRadius.circular(8)),
                     color: Colors.white,
                     child: const Center(
@@ -346,38 +374,6 @@ class _DashBoardState extends State<DashBoard> {
                 ),
               ),
             ),
-
-            // Positioned(
-            //   top: 580,
-            //   left: MediaQuery.of(context).size.width - 371,
-            //   child: Container(
-            //     width: 345,
-            //     height: 59,
-            //     child: InkWell(
-            //       onTap: () {
-            //         Navigator.push(
-            //           context,
-            //           MaterialPageRoute(
-            //               builder: (context) =>
-            //                   RegistrationUser(widget.user, widget.signOut)),
-            //         );
-            //       },
-            //       child: Card(
-            //         //elevation: 30,
-            //         shape: RoundedRectangleBorder(
-            //             //side: BorderSide(color: Colors.white),
-            //             borderRadius: BorderRadius.circular(10)),
-            //         color: Colors.deepOrange[800],
-            //         child: const Center(
-            //           child: Text(
-            //             'Upload a photo',
-            //             style: TextStyle(color: Colors.white),
-            //           ),
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       );
@@ -389,7 +385,24 @@ class _DashBoardState extends State<DashBoard> {
     return Scaffold(
         body: ConstrainedBox(
       constraints: const BoxConstraints.expand(),
-      child: _buildBody(),
+      child: isWorking
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Center(
+                  child: Container(
+                      height: 30,
+                      width: 30,
+                      margin: EdgeInsets.all(5),
+                      child: const CircularProgressIndicator(
+                        strokeWidth: 3,
+                        color: Color(0xFFD78915),
+                      )),
+                ),
+              ],
+            )
+          : _buildBody(),
     ));
   }
 }

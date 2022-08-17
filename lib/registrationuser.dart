@@ -77,8 +77,8 @@ class _RegistrationUserState extends State<RegistrationUser> {
                   height: 30,
                   child: IconButton(
                       onPressed: () {
-                        // Navigator.pop(
-                        //     widget.signOut(), widget.user.clearAuthCache());
+                        Navigator.pop(
+                            widget.signOut(), widget.user.clearAuthCache());
                         Navigator.pop(context);
                       },
                       icon: const Icon(Icons.arrow_back, size: 35)),
@@ -90,7 +90,7 @@ class _RegistrationUserState extends State<RegistrationUser> {
                     'Enter Personal Details',
                     style: TextStyle(
                         fontSize: 23,
-                        color: Colors.red,
+                        color: Color(0xFFD78915),
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.left,
                   ),
@@ -176,7 +176,7 @@ class _RegistrationUserState extends State<RegistrationUser> {
                     const Text('Gender : ', style: TextStyle(fontSize: 17.0)),
                     Radio(
                       value: 0,
-                      activeColor: Colors.red,
+                      activeColor: Color(0xFFD78915),
                       groupValue: _radioValue,
                       onChanged: _handleRadioValueChange,
                     ),
@@ -186,7 +186,7 @@ class _RegistrationUserState extends State<RegistrationUser> {
                     ),
                     Radio(
                       value: 1,
-                      activeColor: Colors.blue,
+                      activeColor: Colors.black,
                       groupValue: _radioValue,
                       onChanged: _handleRadioValueChange,
                     ),
@@ -244,8 +244,7 @@ class _RegistrationUserState extends State<RegistrationUser> {
                         //shape: RoundedRectangleBorder(
                         //   borderRadius: BorderRadius.circular(30)),
                         onPressed: () => _selectDate(context),
-                        color: const Color.fromRGBO(
-                            68, 133, 238, 1), // Refer step 3
+                        color: Colors.blueAccent, // Refer step 3
                         child: Text(
                           "${selectedDate.toLocal()}".split(' ')[0],
                           style: const TextStyle(
@@ -262,9 +261,9 @@ class _RegistrationUserState extends State<RegistrationUser> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: const EdgeInsets.only(right: 8),
+                      margin: const EdgeInsets.only(left: 8, right: 8),
                       height: 46,
-                      width: 230,
+                      width: 330,
                       child: FlatButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
@@ -300,7 +299,7 @@ class _RegistrationUserState extends State<RegistrationUser> {
                               break;
                           }
                         },
-                        color: Colors.red,
+                        color: Color(0xFFD78915),
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(color: Colors.white, fontSize: 15.5),
