@@ -169,48 +169,60 @@ class _RecipePageState extends State<ReciepePage> {
                         child: Wrap(
                           spacing: 15,
                           children: [
-                            Container(
-                              child: SizedBox(
-                                child: Chip(
-                                  backgroundColor: Colors.white,
-                                  shape: const RoundedRectangleBorder(
-                                      side:
-                                          BorderSide(color: Color(0xFFD78915)),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  padding: const EdgeInsets.all(4),
-                                  label: Text(
-                                    // widget.difficultyLevel.toString(),
-                                    difficultyLevel!,
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Color(0xFFD78915)),
-                                  ), //Text
+                            SizedBox(
+                              child: Chip(
+                                avatar: Container(
+                                  height: 17,
+                                  child: ClipRRect(
+                                    child: Image.asset('images/Difficulty.png'),
+                                  ),
                                 ),
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                    side: BorderSide(color: Color(0xFFD78915)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(4))),
+                                padding: const EdgeInsets.all(4),
+                                label: Text(
+                                  // widget.difficultyLevel.toString(),
+                                  difficultyLevel!,
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Color(0xFFD78915)),
+                                ), //Text
                               ),
                             ),
-                            Container(
-                              child: SizedBox(
-                                child: Chip(
-                                  backgroundColor: Colors.white,
-                                  shape: const RoundedRectangleBorder(
-                                      side:
-                                          BorderSide(color: Color(0xFFD78915)),
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4))),
-                                  padding: const EdgeInsets.all(4),
-                                  label: Text(
-                                    // widget.cuisine.toString(),
-                                    cuisine!,
-                                    style: const TextStyle(
-                                        fontSize: 14, color: Color(0xFFD78915)),
-                                  ), //Text
+                            SizedBox(
+                              child: Chip(
+                                avatar: Container(
+                                  height: 17,
+                                  child: ClipRRect(
+                                    child: Image.asset('images/Cusine.png'),
+                                  ),
                                 ),
+                                backgroundColor: Colors.white,
+                                shape: const RoundedRectangleBorder(
+                                    side: BorderSide(color: Color(0xFFD78915)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(4))),
+                                padding: const EdgeInsets.all(4),
+                                label: Text(
+                                  // widget.cuisine.toString(),
+                                  cuisine!,
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Color(0xFFD78915)),
+                                ), //Text
                               ),
                             ),
                             Container(
                               // margin: const EdgeInsets.only(top: 0, left: 15),
                               child: SizedBox(
                                 child: Chip(
+                                  avatar: Container(
+                                    height: 17,
+                                    child: ClipRRect(
+                                      child: Image.asset('images/Calorie.png'),
+                                    ),
+                                  ),
                                   backgroundColor: Colors.white,
                                   shape: const RoundedRectangleBorder(
                                       side:
@@ -280,6 +292,12 @@ class _RecipePageState extends State<ReciepePage> {
                                 top: 10, left: 30, bottom: 10),
                             child: SizedBox(
                               child: Chip(
+                                avatar: Container(
+                                  height: 17,
+                                  child: ClipRRect(
+                                    child: Image.asset('images/Serves.png'),
+                                  ),
+                                ),
                                 backgroundColor: Colors.white,
                                 shape: const RoundedRectangleBorder(
                                     side: BorderSide(color: Color(0xFFD78915)),
@@ -300,6 +318,12 @@ class _RecipePageState extends State<ReciepePage> {
                                 top: 10, left: 15, bottom: 10),
                             child: SizedBox(
                               child: Chip(
+                                avatar: Container(
+                                  height: 17,
+                                  child: ClipRRect(
+                                    child: Image.asset('images/clock.png'),
+                                  ),
+                                ),
                                 backgroundColor: Colors.white,
                                 shape: const RoundedRectangleBorder(
                                     side: BorderSide(color: Color(0xFFD78915)),

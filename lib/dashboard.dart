@@ -37,7 +37,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://f4d2-124-66-170-196.in.ngrok.io/predict'),
+      Uri.parse('https://ac11-124-66-170-196.in.ngrok.io/predict'),
 
       //Uri.parse('http://10.0.2.2:5001/predict'),
     );

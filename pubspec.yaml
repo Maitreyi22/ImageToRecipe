@@ -78,6 +78,11 @@ flutter:
    - images/Pizza.png
    - images/heart.png
    - images/middle_component.png
+   - images/Calorie.png
+   - images/clock.png
+   - images/Cusine.png
+   - images/Difficulty.png
+   - images/Serves.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
