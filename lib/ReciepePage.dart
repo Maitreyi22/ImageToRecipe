@@ -1,13 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:ui';
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
-import 'dashboard.dart';
 
 class ReciepePage extends StatefulWidget {
   GoogleSignInAccount user;
@@ -37,7 +33,6 @@ class _RecipePageState extends State<ReciepePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     readMyRecipe();
   }
@@ -50,19 +45,25 @@ class _RecipePageState extends State<ReciepePage> {
         .get();
 
     setState(() {
-      imageUrl = (documentSnapshot.data() as dynamic)['Image'];
-      name = (documentSnapshot.data() as dynamic)['name'];
-      difficultyLevel =
-          (documentSnapshot.data() as dynamic)['difficulty level'];
-      recipe = (documentSnapshot.data() as dynamic)['recipe'];
-      cuisine = (documentSnapshot.data() as dynamic)['cuisine'];
-      calories = (documentSnapshot.data() as dynamic)['calories'];
-      ingredients = (documentSnapshot.data() as dynamic)['ingredients'];
-      serving = (documentSnapshot.data() as dynamic)['serving'];
-      approxTime = (documentSnapshot.data() as dynamic)['approx time'];
-      recipe = (documentSnapshot.data() as dynamic)['recipe'];
-      suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
-      isWorking = false;
+      if (documentSnapshot['name'] == null) {
+        // Unhandled Exception: Bad state: cannot get a field on a DocumentSnapshotPlatform which does not exist
+        // ha error detoy tu ekda check kar
+        print("Not found");
+      } else {
+        imageUrl = (documentSnapshot.data() as dynamic)['Image'];
+        name = (documentSnapshot.data() as dynamic)['name'];
+        difficultyLevel =
+            (documentSnapshot.data() as dynamic)['difficulty level'];
+        recipe = (documentSnapshot.data() as dynamic)['recipe'];
+        cuisine = (documentSnapshot.data() as dynamic)['cuisine'];
+        calories = (documentSnapshot.data() as dynamic)['calories'];
+        ingredients = (documentSnapshot.data() as dynamic)['ingredients'];
+        serving = (documentSnapshot.data() as dynamic)['serving'];
+        approxTime = (documentSnapshot.data() as dynamic)['approx time'];
+        recipe = (documentSnapshot.data() as dynamic)['recipe'];
+        suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
+        isWorking = false;
+      }
     });
 
     // setState(() {
