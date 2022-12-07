@@ -62,11 +62,12 @@ class _RecipePageState extends State<ReciepePage> {
       approxTime = (documentSnapshot.data() as dynamic)['approx time'];
       recipe = (documentSnapshot.data() as dynamic)['recipe'];
       suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
-    });
-
-    setState(() {
       isWorking = false;
     });
+
+    // setState(() {
+
+    // });
   }
 
   _launchURLZomato() async {

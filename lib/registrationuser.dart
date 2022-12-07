@@ -240,11 +240,14 @@ class _RegistrationUserState extends State<RegistrationUser> {
                     ),
                     Container(
                       width: 120,
-                      child: RaisedButton(
+                      child: ElevatedButton(
                         //shape: RoundedRectangleBorder(
                         //   borderRadius: BorderRadius.circular(30)),
                         onPressed: () => _selectDate(context),
-                        color: Colors.blueAccent, // Refer step 3
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red, // background
+                          onPrimary: Colors.white, // foreground
+                        ), // Refer step 3
                         child: Text(
                           "${selectedDate.toLocal()}".split(' ')[0],
                           style: const TextStyle(
@@ -264,9 +267,13 @@ class _RegistrationUserState extends State<RegistrationUser> {
                       margin: const EdgeInsets.only(left: 8, right: 8),
                       height: 46,
                       width: 330,
-                      child: FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.red, // background
+                          onPrimary: Colors.white, // foreground
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                        ),
                         onPressed: () {
                           switch (validateFields()) {
                             case 0:
@@ -299,7 +306,6 @@ class _RegistrationUserState extends State<RegistrationUser> {
                               break;
                           }
                         },
-                        color: Color(0xFFD78915),
                         child: const Text(
                           'Sign Up',
                           style: TextStyle(color: Colors.white, fontSize: 15.5),
