@@ -59,10 +59,15 @@ def upload():
         pred = predict_image(file_path, model)
         result=pred
         resJson = recipe_details(result)
-        name = resJson['name']
-        return jsonify({
-            "name": name,
-        })
+        if (resJson):
+            name = resJson['name']
+            return jsonify({
+                "name": name,
+            })
+        else:
+            return jsonify({
+                "name" : None
+            })
     return None
 
 if __name__ == '__main__':

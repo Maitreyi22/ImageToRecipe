@@ -10,12 +10,15 @@ db = firestore.client()
 
 def recipe_details(recipeName):
     result = db.collection('recipes').where('name','==',recipeName).get()
-    data = {}
-    for doc in result:
-        data = doc.to_dict()
+    if (result):
+        data = {}
+        for doc in result:
+            data = doc.to_dict()
     
-    ingredients = data['ingredients'].split('* ')
-    del data['ingredients']
-    data['ingredients'] = ingredients
-
-    return data
+        ingredients = data['ingredients'].split('* ')
+        del data['ingredients']
+        data['ingredients'] = ingredients
+        return data
+    else:
+        return False
+    
