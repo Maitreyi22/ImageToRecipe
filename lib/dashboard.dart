@@ -37,7 +37,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://4f9d-219-91-171-252.in.ngrok.io/predict'),
+      Uri.parse('https://d52c-219-91-171-21.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -61,6 +61,7 @@ class _DashBoardState extends State<DashBoard> {
     setState(() {
       name = resJson["name"].toString();
     });
+    print(name);
 
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -77,7 +78,7 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://4f9d-219-91-171-252.in.ngrok.io/predict'),
+      Uri.parse('https://d52c-219-91-171-21.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
