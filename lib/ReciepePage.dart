@@ -62,11 +62,12 @@ class _RecipePageState extends State<ReciepePage> {
       approxTime = (documentSnapshot.data() as dynamic)['approx time'];
       recipe = (documentSnapshot.data() as dynamic)['recipe'];
       suggestions = (documentSnapshot.data() as dynamic)['suggestions'];
-    });
-
-    setState(() {
       isWorking = false;
     });
+
+    // setState(() {
+
+    // });
   }
 
   _launchURLZomato() async {
@@ -483,10 +484,10 @@ class _RecipePageState extends State<ReciepePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const Opacity(
-          opacity: 0.8,
-          child: ModalBarrier(dismissible: false, color: Colors.white),
-        ),
+        // const Opacity(
+        //   opacity: 0.8,
+        //   child: ModalBarrier(dismissible: false, color: Colors.white),
+        // ),
         Center(
             child: isWorking
                 ? Container(

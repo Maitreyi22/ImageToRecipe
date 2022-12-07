@@ -37,9 +37,9 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://ac11-124-66-170-196.in.ngrok.io/predict'),
+      Uri.parse('https://290f-219-91-175-200.in.ngrok.io/predict'),
 
-      //Uri.parse('http://10.0.2.2:5001/predict'),
+      // Uri.parse('http://10.0.2.2:5001/predict'),
     );
     Map<String, String> headers = {"Content-type": "multipart/form-data"};
     request.files.add(
@@ -56,7 +56,7 @@ class _DashBoardState extends State<DashBoard> {
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
 
-    name = resJson["name"];
+    // name = resJson["name"];
 
     setState(() {
       name = resJson["name"];
@@ -77,7 +77,7 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://e940-219-91-178-198.in.ngrok.io/predict'),
+      Uri.parse('https://290f-219-91-175-200.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -96,7 +96,7 @@ class _DashBoardState extends State<DashBoard> {
     http.Response response = await http.Response.fromStream(res);
     final resJson = jsonDecode(response.body);
 
-    name = resJson["name"];
+    // name = resJson["name"];
 
     // setState(() {
     //   isWorking = false;
@@ -346,7 +346,6 @@ class _DashBoardState extends State<DashBoard> {
               ),
             ),
             Positioned(
-              //top: 703,
               top: 703,
               bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
