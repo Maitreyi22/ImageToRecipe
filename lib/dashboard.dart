@@ -37,7 +37,8 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://ac11-124-66-170-196.in.ngrok.io/predict'),
+      Uri.parse(
+          'https://bcad-2409-4042-4d40-f48d-2489-2ed6-5289-6683.in.ngrok.io/predict'),
 
       //Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -77,7 +78,8 @@ class _DashBoardState extends State<DashBoard> {
     selectedImage = File(image!.path);
     var request = http.MultipartRequest(
       'POST',
-      Uri.parse('https://e940-219-91-178-198.in.ngrok.io/predict'),
+      Uri.parse(
+          'https://bcad-2409-4042-4d40-f48d-2489-2ed6-5289-6683.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
