@@ -6,7 +6,19 @@ class NotFoundPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("Recipe Not Found")),
+      body: Column(
+        children: [
+          Container(
+              margin: EdgeInsets.only(top: 350, left: 30, right: 30),
+              child: Text(
+                "OOPs! " + "\n" + "Sorry the recipe does not exist. ",
+                style: TextStyle(
+                    fontSize: 25,
+                    color: Color(0xFFD78915),
+                    fontWeight: FontWeight.bold),
+              )),
+        ],
+      ),
     );
   }
 }

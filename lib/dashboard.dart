@@ -37,7 +37,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://7de3-124-66-171-222.in.ngrok.io/predict'),
+      Uri.parse('https://63d7-124-66-171-222.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -79,7 +79,7 @@ class _DashBoardState extends State<DashBoard> {
     var request = http.MultipartRequest(
       'POST',
 
-      Uri.parse('https://7de3-124-66-171-222.in.ngrok.io/predict'),
+      Uri.parse('https://63d7-124-66-171-222.in.ngrok.io/predict'),
 
       // Uri.parse('http://10.0.2.2:5001/predict'),
     );
@@ -348,8 +348,8 @@ class _DashBoardState extends State<DashBoard> {
               ),
             ),
             Positioned(
-              // top: 703,
-              top: 600,
+              top: 703,
+              // top: 600,
               bottom: 44,
               left: MediaQuery.of(context).size.width - 370,
               right: MediaQuery.of(context).size.width - 370,
